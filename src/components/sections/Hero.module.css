@@ -1,206 +1,157 @@
 /* ============================================================================
-   HERO — Meshly is the star. Multi-industry auto-cycling showcase.
+   HERO — Dark canvas, cinematic statement. No cycling showcase.
+   Background matches Capabilities: copper glow + blue counter-glow.
    ============================================================================ */
 
 .hero {
   min-height: 100svh;
   padding-top: var(--nav-height);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--sp-40);
   overflow: hidden;
   position: relative;
+}
+
+/* -------------------------------------------------------------------------
+   Ambient glows — copied from Capabilities section
+   ------------------------------------------------------------------------- */
+
+/* Copper — bottom left */
+.glowCopper {
+  position: absolute;
+  bottom: -15%;
+  left: -8%;
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 115, 61, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Blue — top right */
+.glowBlue {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30, 80, 200, 0.10) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Interactive mesh substrate */
 .mesh {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
+}
+
+/* -------------------------------------------------------------------------
+   Centered content block
+   ------------------------------------------------------------------------- */
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-32);
+  text-align: center;
+  padding: 0 var(--content-gutter);
+  max-width: var(--content-w);
+  width: 100%;
 }
 
 /* -------------------------------------------------------------------------
    Headline
    ------------------------------------------------------------------------- */
-.headlineWrapper {
-  text-align: center;
-  padding: 0 var(--content-gutter);
-  max-width: var(--content-w);
-  width: 100%;
-  min-height: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
   font-weight: 400;
   font-style: italic;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
   color: var(--color-text);
   margin: 0;
-  text-align: center;
 }
 
 /* -------------------------------------------------------------------------
-   Showcase — large cycling mockup
+   Descriptor + CTAs
    ------------------------------------------------------------------------- */
-.showcaseWrapper {
-  width: calc(100% - 6rem);
-  max-width: 1380px;
-  position: relative;
-  z-index: 1;
-}
-
-.mockup {
-  width: 100%;
-  /* Subtle lift shadow — depth on dark */
-  filter: drop-shadow(0 32px 64px rgba(0, 0, 0, 0.55));
-}
-
-@media (max-width: 767px) {
-  .showcaseWrapper { width: calc(100% - 2.5rem); }
-}
-
-/* -------------------------------------------------------------------------
-   Industry selector + progress
-   ------------------------------------------------------------------------- */
-.selector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--sp-12);
-  width: 100%;
-  max-width: var(--content-w);
-  padding: 0 var(--content-gutter);
-  position: relative;
-  z-index: 1;
-}
-
-.tabs {
-  display: flex;
-  gap: 0;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.tab {
-  font-family: var(--font-body);
-  font-size: var(--text-13);
-  font-weight: 500;
-  color: var(--color-text-muted);
-  background: none;
-  border: none;
-  padding: var(--sp-8) var(--sp-16);
-  cursor: pointer;
-  transition: color var(--dur-fast);
-  white-space: nowrap;
-  position: relative;
-}
-
-.tab::after {
-  content: '·';
-  position: absolute;
-  right: 0;
-  color: var(--color-text-muted);
-  opacity: 0.3;
-}
-
-.tab:last-child::after { display: none; }
-
-.tab:hover { color: var(--color-text-secondary); }
-
-.tabActive {
-  color: var(--color-text);
-}
-
-/* Progress track */
-.progressTrack {
-  width: 120px;
-  height: 1.5px;
-  background: var(--color-border);
-  border-radius: 1px;
-  overflow: hidden;
-}
-
-.progressFill {
-  height: 100%;
-  width: 0%;
-  background: var(--color-copper);
-  border-radius: 1px;
-  animation: progressFill 5s linear forwards;
-}
-
-.progressPaused {
-  animation: none;
-  width: 100%;
-  opacity: 0.4;
-}
-
-@keyframes progressFill {
-  from { width: 0%; }
-  to   { width: 100%; }
-}
-
-/* -------------------------------------------------------------------------
-   Footer row
-   ------------------------------------------------------------------------- */
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--sp-16);
-  text-align: center;
-  padding: 0 var(--content-gutter);
-  padding-bottom: var(--sp-56);
-  position: relative;
-  z-index: 1;
-}
-
 .descriptor {
   font-family: var(--font-body);
-  font-size: var(--text-15);
+  font-size: var(--text-17);
   color: var(--color-text-muted);
   margin: 0;
+  line-height: 1;
 }
 
 .ctas {
   display: flex;
   align-items: center;
-  gap: var(--sp-12);
+  gap: var(--sp-16);
 }
 
 .ctaSecondary {
   font-family: var(--font-body);
-  font-size: var(--text-13);
+  font-size: var(--text-15);
   font-weight: 500;
   color: var(--color-text-secondary);
   transition: color var(--dur-fast);
+  position: relative;
+  padding-bottom: 1px;
 }
+
+.ctaSecondary::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-text-secondary);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
 .ctaSecondary:hover { color: var(--color-text); }
+.ctaSecondary:hover::after { width: 100%; }
 
 .ctaDivider {
   color: var(--color-text-muted);
   font-size: var(--text-13);
+  user-select: none;
 }
 
 .ctaPrimary {
   font-family: var(--font-body);
-  font-size: var(--text-13);
+  font-size: var(--text-15);
   font-weight: 600;
   color: var(--color-copper);
   transition: opacity var(--dur-fast);
+  position: relative;
+  padding-bottom: 1px;
 }
-.ctaPrimary:hover { opacity: 0.75; }
+
+.ctaPrimary::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-copper);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.ctaPrimary:hover { opacity: 0.82; }
+.ctaPrimary:hover::after { width: 100%; }
 
 @media (max-width: 767px) {
-  .headlineWrapper { min-height: 4rem; }
-  .headline { font-size: clamp(1.75rem, 8vw, 2.5rem); }
+  .headline { font-size: clamp(2rem, 9vw, 2.75rem); }
+  .ctas     { flex-wrap: wrap; justify-content: center; }
 }

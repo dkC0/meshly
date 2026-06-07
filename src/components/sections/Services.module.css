@@ -1,45 +1,110 @@
+/* ============================================================================
+   SERVICES (WHAT WE BUILD) — Editorial numbered layout, premium and creative
+   ============================================================================ */
+
 .section {
   padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle copper glow — top right */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -8%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 115, 61, 0.07) 0%, transparent 65%);
+  pointer-events: none;
 }
 
 .inner {
   max-width: var(--content-w);
   margin: 0 auto;
   padding: 0 var(--content-gutter);
-  max-width: 760px;
-}
-
-.header {
-  margin-bottom: var(--sp-40);
-}
-
-.eyebrow {
-  font-family: var(--font-display);
-  font-size: var(--text-40);
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: -0.025em;
-  color: var(--color-text);
-  line-height: 1.1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-80);
+  position: relative;
+  z-index: 1;
 }
 
 /* -------------------------------------------------------------------------
-   Menu — each row lifts on hover
+   Header — two-column
    ------------------------------------------------------------------------- */
-.menu {
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-64);
+  align-items: end;
+}
+
+@media (max-width: 767px) {
+  .header {
+    grid-template-columns: 1fr;
+    gap: var(--sp-24);
+  }
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--color-copper);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 3.5vw, 2.875rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.headerRight {
+  font-family: var(--font-body);
+  font-size: var(--text-17);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+  /* Align to bottom of header grid row */
+  align-self: end;
+  padding-bottom: 2px;
+}
+
+/* -------------------------------------------------------------------------
+   Service list — numbered editorial rows
+   ------------------------------------------------------------------------- */
+.list {
   display: flex;
   flex-direction: column;
 }
 
 .row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: 4rem 1fr auto;
   gap: var(--sp-32);
-  padding: var(--sp-20) var(--sp-8);
+  align-items: start;
+  padding: var(--sp-32) 0;
   border-top: 1px solid var(--color-border-subtle);
-  transition: padding-left var(--dur-base) var(--ease-out);
+  transition:
+    padding-left     var(--dur-base) var(--ease-out),
+    border-color     var(--dur-slow);
   cursor: default;
+  position: relative;
 }
 
 .row:last-child {
@@ -47,47 +112,92 @@
 }
 
 .row:hover {
-  padding-left: var(--sp-16);
-}
-
-.serviceName {
-  font-family: var(--font-body);
-  font-size: var(--text-17);
-  font-weight: 400;
-  color: var(--color-text);
-  transition: color var(--dur-fast);
-}
-
-.row:hover .serviceName {
-  color: #fff;
-}
-
-.servicePrice {
-  font-family: var(--font-mono);
-  font-size: var(--text-13);
-  font-weight: 400;
-  color: var(--color-text-muted);
-  white-space: nowrap;
-  transition: color var(--dur-fast);
-}
-
-.row:hover .servicePrice {
-  color: var(--color-text-secondary);
-}
-
-.note {
-  margin-top: var(--sp-32);
-  font-family: var(--font-display);
-  font-size: var(--text-20);
-  font-weight: 400;
-  font-style: italic;
-  color: var(--color-text-secondary);
-  line-height: 1.4;
+  padding-left: var(--sp-8);
+  border-top-color: var(--color-border);
 }
 
 @media (max-width: 767px) {
-  .eyebrow { font-size: var(--text-32); }
-  .note    { font-size: var(--text-17); }
-  .row     { flex-direction: column; gap: var(--sp-4); }
-  .servicePrice { font-size: var(--text-11); color: var(--color-copper); }
+  .row {
+    grid-template-columns: 2.5rem 1fr;
+    gap: var(--sp-16);
+  }
+}
+
+/* Large copper number — italic serif */
+.num {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-copper);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity var(--dur-fast);
+  padding-top: 2px;
+}
+
+.row:hover .num {
+  opacity: 1;
+}
+
+/* Middle — name + description */
+.rowContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+.name {
+  font-family: var(--font-body);
+  font-size: var(--text-20);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.25;
+  transition: color var(--dur-fast);
+}
+
+.row:hover .name {
+  color: #fff;
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: var(--text-15);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 52ch;
+  transition: color var(--dur-fast);
+}
+
+.row:hover .desc {
+  color: var(--color-text-secondary);
+}
+
+/* Price — copper, mono, right-aligned */
+.price {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-weight: 400;
+  color: var(--color-copper);
+  white-space: nowrap;
+  text-align: right;
+  padding-top: 4px;
+  letter-spacing: 0.02em;
+  transition: opacity var(--dur-fast);
+  opacity: 0.75;
+}
+
+.row:hover .price {
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  /* Price moves below content on mobile */
+  .price {
+    grid-column: 2;
+    text-align: left;
+    font-size: var(--text-11);
+  }
 }

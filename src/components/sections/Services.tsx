@@ -4,66 +4,79 @@ import { motion } from 'framer-motion';
 import styles from './Services.module.css';
 
 const SERVICES = [
-  { name: 'Website Design & Development', price: '€2,500 – €6,000'  },
-  { name: 'Brand & Visual Identity',       price: '€1,200 – €3,000'  },
-  { name: 'Website Refresh',               price: '€800 – €2,500'    },
-  { name: 'Ongoing Care & Updates',        price: 'from €300/month'  },
+  {
+    num:         '01',
+    name:        'Website Design & Development',
+    description: 'Custom-coded from scratch. Fast, modern, and built entirely around what your business needs to do online — not adapted from a template.',
+    price:       '€2,500 – €6,000',
+  },
+  {
+    num:         '02',
+    name:        'Brand & Visual Identity',
+    description: 'Logo, colour system, and typography that work together from day one — the visual foundation everything else is built on.',
+    price:       '€1,200 – €3,000',
+  },
+  {
+    num:         '03',
+    name:        'Website Refresh',
+    description: 'Modernise what you already have. Better design, better speed, better first impressions — without starting from scratch.',
+    price:       '€800 – €2,500',
+  },
+  {
+    num:         '04',
+    name:        'Ongoing Care & Updates',
+    description: 'Monthly edits, content updates, and technical maintenance — so your website keeps working exactly the way it should.',
+    price:       'from €300/month',
+  },
 ];
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
-
-const rowVariants = {
-  hidden:  { opacity: 0, y: 8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
-};
 
 export default function Services() {
   return (
     <section id="services" className={styles.section} aria-label="Services and pricing">
       <div className={styles.inner}>
+
+        {/* Header — two columns */}
         <motion.div
           className={styles.header}
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className={styles.eyebrow}>What we build</span>
+          <div className={styles.headerLeft}>
+            <span className={styles.eyebrow}>What we build</span>
+            <h2 className={styles.title}>
+              Every engagement<br />priced in advance.
+            </h2>
+          </div>
+          <p className={styles.headerRight}>
+            No hourly rates. No surprise invoices. You know the number
+            before a single line of code is written.
+          </p>
         </motion.div>
 
-        <motion.div
-          className={styles.menu}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          role="list"
-        >
-          {SERVICES.map(({ name, price }) => (
+        {/* Service rows */}
+        <div className={styles.list} role="list">
+          {SERVICES.map((service, i) => (
             <motion.div
-              key={name}
+              key={service.num}
               className={styles.row}
-              variants={rowVariants}
               role="listitem"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.45, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className={styles.serviceName}>{name}</span>
-              <span className={styles.servicePrice}>{price}</span>
+              <span className={styles.num}>{service.num}</span>
+              <div className={styles.rowContent}>
+                <span className={styles.name}>{service.name}</span>
+                <p className={styles.desc}>{service.description}</p>
+              </div>
+              <span className={styles.price}>{service.price}</span>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.p
-          className={styles.note}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-        >
-          Every project priced before work begins. No hourly rates. No surprises.
-        </motion.p>
       </div>
     </section>
   );
