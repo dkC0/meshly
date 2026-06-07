@@ -24,10 +24,6 @@ export default function Hero() {
   return (
     <section id="hero" className={styles.hero} aria-label="Studio — Meshly">
 
-      {/* Ambient glow — copper bottom-left + blue top-right, same as Capabilities */}
-      <div className={styles.glowCopper} aria-hidden="true" />
-      <div className={styles.glowBlue}   aria-hidden="true" />
-
       {/* Interactive mesh — responds to cursor */}
       <MeshField
         opacity={0.07}

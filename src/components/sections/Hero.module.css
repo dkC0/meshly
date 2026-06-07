@@ -14,31 +14,33 @@
 }
 
 /* -------------------------------------------------------------------------
-   Ambient glows — copied from Capabilities section
+   Ambient glows — identical to Capabilities section ::before / ::after
    ------------------------------------------------------------------------- */
 
-/* Copper — bottom left */
-.glowCopper {
+/* Copper glow — bottom left */
+.hero::before {
+  content: '';
   position: absolute;
   bottom: -15%;
   left: -8%;
-  width: 620px;
-  height: 620px;
+  width: 600px;
+  height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 115, 61, 0.12) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(201, 115, 61, 0.10) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Blue — top right */
-.glowBlue {
+/* Blue counter-glow — top right */
+.hero::after {
+  content: '';
   position: absolute;
   top: -10%;
   right: -5%;
-  width: 480px;
-  height: 480px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(30, 80, 200, 0.10) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(30, 80, 200, 0.08) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
 }
