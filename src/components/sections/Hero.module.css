@@ -173,11 +173,17 @@
 @media (max-width: 900px) {
   .compare {
     grid-template-columns: 1fr;
-    max-width: 480px;
-    gap: var(--sp-40);
+    max-width: 420px;
+    gap: var(--sp-20);
   }
 
-  .frameBefore { display: none; }
+  /* Keep both frames — shrink "Before" into a clearly secondary thumbnail
+     that sits above the full-size "After" frame, so the contrast still
+     reads as one cohesive before → after statement. */
+  .frameBefore {
+    max-width: 60%;
+    justify-self: start;
+  }
 }
 
 @media (max-width: 767px) {

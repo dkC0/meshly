@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,8 +13,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // TODO: wire up email delivery (Resend, Nodemailer, etc.)
-    console.log('[Meshly contact]', { name, businessType, budget, message });
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      await resend.emails.send({
+        from: 'Meshly <onboarding@resend.dev>',
+        to: process.env.CONTACT_TO_EMAIL!,
+        subject: `New project inquiry${businessType ? ` — ${businessType}` : ''}`,
+        text:
+          `Name: ${name}\n` +
+          `Business type: ${businessType || '—'}\n` +
+          `Budget: ${budget || '—'}\n\n` +
+          `Message:\n${message}`,
+      });
+    } catch (emailError) {
+      console.error('[Meshly contact] Failed to send email notification:', emailError);
+    }
 
     return NextResponse.json({ success: true });
   } catch {
