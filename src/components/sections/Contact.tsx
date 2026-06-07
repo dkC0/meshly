@@ -135,7 +135,7 @@ export default function Contact() {
           variants={fade}
         >
           <span className={styles.eyebrow}>Start a project</span>
-          <h2 className={styles.headline}>Tell us what you need.</h2>
+          <h2 className={styles.headline}>Let&rsquo;s make it work.</h2>
           <p className={styles.sub}>
             Every engagement begins with a 30-minute discovery call.
             No commitment required. We'll tell you honestly whether
@@ -256,7 +256,7 @@ export default function Contact() {
                 disabled={submitting}
                 aria-busy={submitting}
               >
-                {submitting ? 'Sending…' : 'Send message'}
+                {submitting ? 'Sending…' : 'Tell me about it →'}
               </button>
 
             </form>

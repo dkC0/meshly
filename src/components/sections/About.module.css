@@ -1,5 +1,6 @@
 /* ============================================================================
-   ABOUT — Two-column, copper stats, large quote mark, warm orange accents
+   ABOUT — Two-column. The testimonial is the focal point of this section.
+   Relies entirely on the global ambient glow (globals.css body::before).
    ============================================================================ */
 
 .section {
@@ -7,19 +8,6 @@
   background: var(--color-bg-subtle);
   position: relative;
   overflow: hidden;
-}
-
-/* Large decorative copper glow — bottom right */
-.section::after {
-  content: '';
-  position: absolute;
-  bottom: -20%;
-  right: -5%;
-  width: 700px;
-  height: 700px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 115, 61, 0.09) 0%, transparent 65%);
-  pointer-events: none;
 }
 
 .inner {
@@ -47,7 +35,6 @@
 .left {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-48);
   position: sticky;
   top: calc(var(--nav-height) + var(--sp-40));
 }
@@ -71,44 +58,6 @@
   color: var(--color-copper);
 }
 
-/* Stats row — large copper numerals */
-.stats {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-24);
-}
-
-.stat {
-  display: flex;
-  align-items: baseline;
-  gap: var(--sp-16);
-  padding-bottom: var(--sp-24);
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-
-.stat:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.statValue {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 400;
-  font-style: italic;
-  color: var(--color-copper);
-  letter-spacing: -0.03em;
-  line-height: 1;
-  min-width: 4.5rem;
-}
-
-.statLabel {
-  font-family: var(--font-body);
-  font-size: var(--text-15);
-  color: var(--color-text-secondary);
-  line-height: 1;
-}
-
 /* -------------------------------------------------------------------------
    Right — bio + testimonial + process
    ------------------------------------------------------------------------- */
@@ -127,36 +76,25 @@
 }
 
 /* -------------------------------------------------------------------------
-   Testimonial — copper oversized quote mark
+   Testimonial — the focal point. Scale and the left rule carry the moment;
+   no quotation glyph.
    ------------------------------------------------------------------------- */
 .quote {
   position: relative;
-  margin: 0;
-  padding: var(--sp-32) 0 var(--sp-32) var(--sp-24);
+  margin: var(--sp-8) 0 0;
+  padding: var(--sp-8) 0 var(--sp-8) var(--sp-32);
   border-left: 2px solid var(--color-copper);
-}
-
-/* Oversized decorative quote mark */
-.quoteMark {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 4rem;
-  line-height: 0.6;
-  color: var(--color-copper);
-  margin-bottom: var(--sp-16);
-  opacity: 0.8;
-  user-select: none;
 }
 
 .quoteText {
   font-family: var(--font-display);
-  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
   font-weight: 400;
   font-style: italic;
   color: var(--color-text);
-  line-height: 1.5;
-  margin: 0 0 var(--sp-16);
-  letter-spacing: -0.01em;
+  line-height: 1.35;
+  margin: 0 0 var(--sp-20);
+  letter-spacing: -0.02em;
 }
 
 .quoteCite {

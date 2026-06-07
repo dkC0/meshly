@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import MeshField from '@/components/ui/MeshField';
+import BrowserMockup from '@/components/ui/BrowserMockup';
 import styles from './Hero.module.css';
 
 export default function Hero() {
@@ -23,6 +25,14 @@ export default function Hero() {
   return (
     <section id="hero" className={styles.hero} aria-label="Studio — Meshly">
 
+      <MeshField
+        opacity={0.05}
+        density="sparse"
+        mouseReactive
+        id="hero-mesh"
+        className={styles.meshBackground}
+      />
+
       {/* Content */}
       <div className={styles.content}>
         {loaded && (
@@ -42,22 +52,38 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              Web design &amp; development studio. Warsaw, Poland.
+              Most are losing you customers, quietly.
             </motion.p>
 
             <motion.div
               className={styles.ctas}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
             >
-              <a href="#work"    className={styles.ctaSecondary} onClick={handleScroll('#work')}>
-                See the work ↓
+              <a href="#contact" className={styles.ctaPrimary} onClick={handleScroll('#contact')}>
+                <span>Start a project</span>
+                <span className={styles.ctaArrow} aria-hidden="true">→</span>
               </a>
-              <span className={styles.ctaDivider} aria-hidden="true">·</span>
-              <a href="#contact" className={styles.ctaPrimary}   onClick={handleScroll('#contact')}>
-                Start a project →
+              <a href="#work" className={styles.ctaSecondary} onClick={handleScroll('#work')}>
+                See the work
               </a>
+            </motion.div>
+
+            <motion.div
+              className={styles.compare}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className={`${styles.frame} ${styles.frameBefore}`}>
+                <BrowserMockup project="marani" showBefore className={styles.frameMockup} />
+                <span className={styles.frameLabel}>Before</span>
+              </div>
+              <div className={`${styles.frame} ${styles.frameAfter}`}>
+                <BrowserMockup project="marani" className={styles.frameMockup} />
+                <span className={styles.frameLabel}>After Meshly</span>
+              </div>
             </motion.div>
           </>
         )}

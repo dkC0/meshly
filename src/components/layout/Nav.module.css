@@ -45,6 +45,13 @@
   border-radius: 50%;
   background: var(--color-copper);
   flex-shrink: 0;
+  animation: dotPulse 6.5s var(--ease-inout) infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1);    opacity: 1;    }
+  6%       { transform: scale(1.35); opacity: 0.75; }
+  12%      { transform: scale(1);    opacity: 1;    }
 }
 
 .wordmarkText {

@@ -8,19 +8,6 @@
   overflow: hidden;
 }
 
-/* Subtle copper glow — top right */
-.section::before {
-  content: '';
-  position: absolute;
-  top: -10%;
-  right: -8%;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 115, 61, 0.07) 0%, transparent 65%);
-  pointer-events: none;
-}
-
 .inner {
   max-width: var(--content-w);
   margin: 0 auto;

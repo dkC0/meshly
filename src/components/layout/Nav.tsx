@@ -16,6 +16,7 @@ export default function Nav() {
   const [menuOpen,    setMenuOpen]    = useState(false);
   const [listening,   setListening]   = useState(false);
   const [typingText,  setTypingText]  = useState('');
+  const [navPreview,  setNavPreview]  = useState(false);
   const listeningTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -74,8 +75,11 @@ export default function Nav() {
       const preview = typingText.slice(0, 46);
       return preview.length < typingText.length ? preview + '…' : preview;
     }
+    if (navPreview) return 'Listening…';
     return 'Meshly';
   })();
+
+  const showingAlt = listening || navPreview;
 
   return (
     <>
@@ -90,7 +94,7 @@ export default function Nav() {
             <span className={styles.dot} aria-hidden="true" />
             <motion.span
               key={wordmark}
-              className={`${styles.wordmarkText} ${listening ? styles.wordmarkAlt : ''}`}
+              className={`${styles.wordmarkText} ${showingAlt ? styles.wordmarkAlt : ''}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
@@ -106,6 +110,8 @@ export default function Nav() {
                 href={href}
                 className={styles.link}
                 onClick={e => { e.preventDefault(); handleNavClick(href); }}
+                onMouseEnter={href === '#contact' ? () => setNavPreview(true) : undefined}
+                onMouseLeave={href === '#contact' ? () => setNavPreview(false) : undefined}
               >
                 {label}
               </a>

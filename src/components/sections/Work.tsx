@@ -2,28 +2,14 @@
 
 import { motion } from 'framer-motion';
 import BrowserMockup from '@/components/ui/BrowserMockup';
+import { projects } from '@/lib/projects';
 import styles from './Work.module.css';
 
-const PROJECTS = [
-  {
-    id:       'marani'   as const,
-    name:     'Marani',
-    category: 'Restaurant · Warsaw',
-    result:   'More reservations, more covers, more regulars.',
-  },
-  {
-    id:       'adriano'  as const,
-    name:     'Adriano',
-    category: 'Pizzeria Chain · Poland',
-    result:   'One design system across four locations — and scaling.',
-  },
-  {
-    id:       'vantage'  as const,
-    name:     'Vantage',
-    category: 'Premium Services',
-    result:   'Positioned alongside London consultancies. Digitally.',
-  },
-];
+const MOCKUPS = {
+  Marani:  'marani',
+  Adriano: 'adriano',
+  Vantage: 'vantage',
+} as const;
 
 export default function Work() {
   return (
@@ -43,28 +29,35 @@ export default function Work() {
           </h2>
         </motion.div>
 
-        <motion.div
-          className={styles.grid}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {PROJECTS.map((project) => (
-            <div key={project.id} className={styles.card}>
-              <div className={styles.mockupWrap}>
-                <BrowserMockup project={project.id} className={styles.mockup} />
+        <div className={styles.grid}>
+          {projects.map((project, i) => (
+            <motion.article
+              key={project.name}
+              className={styles.card}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className={styles.metric}>
+                <span className={styles.metricValue}>{project.metric}</span>
+                <span className={styles.metricLabel}>{project.metricLabel}</span>
               </div>
-              <div className={styles.meta}>
-                <div className={styles.metaTop}>
+
+              <div className={styles.cardBody}>
+                <div className={styles.meta}>
                   <span className={styles.projectName}>{project.name}</span>
-                  <span className={styles.projectCategory}>{project.category}</span>
+                  <span className={styles.projectCategory}>{project.clientType} · {project.year}</span>
                 </div>
-                <p className={styles.result}>{project.result}</p>
+                <p className={styles.synthesis}>{project.synthesis}</p>
               </div>
-            </div>
+
+              <div className={styles.mockupWrap}>
+                <BrowserMockup project={MOCKUPS[project.name as keyof typeof MOCKUPS]} className={styles.mockup} />
+              </div>
+            </motion.article>
           ))}
-        </motion.div>
+        </div>
 
         <motion.div
           className={styles.cta}
@@ -74,7 +67,7 @@ export default function Work() {
           transition={{ duration: 0.4, delay: 0.2 }}
         >
           <a href="#contact" className={styles.ctaLink}>
-            Start your project →
+            Start a project →
           </a>
         </motion.div>
 
