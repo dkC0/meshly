@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { EASE_OUT_EXPO } from '@/lib/animations';
 import styles from './Loader.module.css';
 
 const LETTERS  = ['M', 'E', 'S', 'H', 'L', 'Y'];
@@ -86,7 +87,7 @@ export default function Loader() {
                   className={styles.letter}
                   initial={{ opacity: 0, y: 8 }}
                   animate={letterCount > i ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.2, ease: EASE_OUT_EXPO }}
                 >
                   {letter}
                 </motion.span>
@@ -98,7 +99,7 @@ export default function Loader() {
               className={styles.rule}
               initial={{ scaleX: 0 }}
               animate={letterCount === LETTERS.length ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
             />
 
             {/* Result lines — client / result pairs */}
@@ -109,7 +110,7 @@ export default function Loader() {
                   className={styles.row}
                   initial={{ opacity: 0, y: 5 }}
                   animate={linesVisible[i] ? { opacity: 1, y: 0 } : { opacity: 0, y: 5 }}
-                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.25, ease: EASE_OUT_EXPO }}
                 >
                   <span className={styles.client}>{client}</span>
                   <span className={styles.result}>{result}</span>

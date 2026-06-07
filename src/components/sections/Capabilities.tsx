@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { EASE_OUT_EXPO } from '@/lib/animations';
 import styles from './Capabilities.module.css';
 
 const CAPABILITIES = [
@@ -41,7 +42,7 @@ export default function Capabilities() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
         >
           <span className={styles.eyebrow}>How we work</span>
           <h2 className={styles.title}>
@@ -63,7 +64,7 @@ export default function Capabilities() {
               className={styles.card}
               role="listitem"
               variants={cardVariants}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.55, ease: EASE_OUT_EXPO }}
             >
               <span className={styles.cardNumber}>{cap.number}</span>
               <span className={styles.ghostNumber} aria-hidden="true">{cap.number}</span>

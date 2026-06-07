@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { EASE_OUT_EXPO } from '@/lib/animations';
 import styles from './Footer.module.css';
 
 const CLOSING_WORDS = 'Built to our own standard.'.split(' ');
@@ -17,7 +18,7 @@ export default function Footer() {
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, delay: i * 0.07, ease: EASE_OUT_EXPO }}
             aria-hidden="true"
           >
             {word}

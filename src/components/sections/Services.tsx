@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { EASE_OUT_EXPO } from '@/lib/animations';
 import styles from './Services.module.css';
 
 const SERVICES = [
@@ -41,7 +42,7 @@ export default function Services() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.55, ease: EASE_OUT_EXPO }}
         >
           <div className={styles.headerLeft}>
             <span className={styles.eyebrow}>What we build</span>
@@ -65,7 +66,7 @@ export default function Services() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.45, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.45, delay: i * 0.07, ease: EASE_OUT_EXPO }}
             >
               <span className={styles.num}>{service.num}</span>
               <div className={styles.rowContent}>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { EASE_OUT_EXPO } from '@/lib/animations';
 import styles from './Nav.module.css';
 
 const NAV_LINKS = [
@@ -137,7 +138,7 @@ export default function Nav() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.25, ease: EASE_OUT_EXPO }}
             role="dialog"
             aria-label="Navigation"
           >
@@ -150,7 +151,7 @@ export default function Nav() {
                   onClick={e => { e.preventDefault(); handleNavClick(href); }}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.06, duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ delay: i * 0.06, duration: 0.32, ease: EASE_OUT_EXPO }}
                 >
                   {label}
                 </motion.a>

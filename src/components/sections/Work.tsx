@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import BrowserMockup from '@/components/ui/BrowserMockup';
+import { EASE_OUT_EXPO } from '@/lib/animations';
 import { projects } from '@/lib/projects';
 import styles from './Work.module.css';
 
@@ -21,7 +22,7 @@ export default function Work() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.55, ease: EASE_OUT_EXPO }}
         >
           <p className={styles.eyebrow}>Selected work</p>
           <h2 className={styles.title}>
@@ -37,7 +38,7 @@ export default function Work() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: EASE_OUT_EXPO }}
             >
               <div className={styles.metric}>
                 <span className={styles.metricValue}>{project.metric}</span>
