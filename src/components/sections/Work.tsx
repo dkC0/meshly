@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BrowserMockup from '@/components/ui/BrowserMockup';
 import styles from './Work.module.css';
 
@@ -8,15 +8,12 @@ interface MetricProps {
   value: string;
   label: string;
   note: string;
-  prefix?: string;
-  suffix?: string;
   numericTarget?: number;
   isTime?: boolean;
 }
 
 function Metric({ value, label, note, numericTarget, isTime }: MetricProps) {
   const [displayed, setDisplayed] = useState('0');
-  const [flashed,   setFlashed]   = useState(false);
   const ref                       = useRef<HTMLDivElement>(null);
   const animated                  = useRef(false);
 
@@ -29,13 +26,12 @@ function Metric({ value, label, note, numericTarget, isTime }: MetricProps) {
         if (!entry.isIntersecting || animated.current) return;
         animated.current = true;
 
-        const duration = 1200;
+        const duration = 1400;
         const start    = performance.now();
 
         const tick = (now: number) => {
           const elapsed  = now - start;
           const progress = Math.min(elapsed / duration, 1);
-          // Decelerate: fast start, slow finish
           const eased    = 1 - Math.pow(1 - progress, 3);
           const current  = isTime
             ? (eased * numericTarget).toFixed(1)
@@ -47,8 +43,6 @@ function Metric({ value, label, note, numericTarget, isTime }: MetricProps) {
             requestAnimationFrame(tick);
           } else {
             setDisplayed(value);
-            setFlashed(true);
-            setTimeout(() => setFlashed(false), 600);
           }
         };
 
@@ -64,9 +58,7 @@ function Metric({ value, label, note, numericTarget, isTime }: MetricProps) {
 
   return (
     <div ref={ref} className={styles.metric}>
-      <div className={`${styles.metricValue} ${flashed ? styles.metricFlash : ''}`}>
-        {displayed}
-      </div>
+      <div className={styles.metricValue}>{displayed}</div>
       <div className={styles.metricLabel}>{label}</div>
       <div className={styles.metricNote}>{note}</div>
     </div>
@@ -74,61 +66,23 @@ function Metric({ value, label, note, numericTarget, isTime }: MetricProps) {
 }
 
 interface PanelProps {
-  id:        string;
-  project:   'marani' | 'adriano' | 'vantage';
-  dark?:     boolean;
-  light?:    boolean;    /* panel has a light brand background — inverts meta text */
-  bg:        string;
-  meta:      string;
-  metrics:   MetricProps[];
-  summary:   string;
-  liveUrl:   string;
-  reverse?:  boolean;
-  dispatchVisible?: boolean;
+  id:       string;
+  project:  'marani' | 'adriano' | 'vantage';
+  dark?:    boolean;
+  bg:       string;
+  meta:     string;
+  metrics:  MetricProps[];
+  summary:  string;
+  liveUrl:  string;
+  reverse?: boolean;
 }
 
-function WorkPanel({
-  id, project, dark, light, bg, meta, metrics, summary, liveUrl, reverse, dispatchVisible,
-}: PanelProps) {
+function WorkPanel({ id, project, dark, bg, meta, metrics, summary, liveUrl, reverse }: PanelProps) {
   const [showBefore, setShowBefore] = useState(false);
-  const [hoverBefore, setHoverBefore] = useState(false);
-  const panelRef = useRef<HTMLElement>(null);
-
-  // Dispatch visibility events for nav + hero headline
-  useEffect(() => {
-    if (!dispatchVisible) return;
-    const el = panelRef.current;
-    if (!el) return;
-
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          window.dispatchEvent(new CustomEvent('meshly:marani-visible'));
-        } else {
-          window.dispatchEvent(new CustomEvent('meshly:marani-hidden'));
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [dispatchVisible]);
-
-  const toggleBefore = useCallback(() => {
-    setShowBefore(prev => {
-      if (!prev) {
-        // Auto-restore after 4s
-        setTimeout(() => setShowBefore(false), 4000);
-      }
-      return !prev;
-    });
-  }, []);
 
   return (
     <section
       id={id}
-      ref={panelRef}
       className={`${styles.panel} ${reverse ? styles.panelReverse : ''}`}
       style={{ background: bg }}
       aria-label={`Case study: ${project}`}
@@ -136,38 +90,32 @@ function WorkPanel({
       <div className={styles.panelInner}>
         {/* Mockup side */}
         <div className={styles.mockupSide}>
-          <div className={styles.mockupFrame}>
+          <div
+            className={styles.mockupFrame}
+            onMouseLeave={() => setShowBefore(false)}
+          >
             <BrowserMockup
               project={project}
               showBefore={showBefore}
               className={styles.mockup}
             />
-            {/* Before toggle */}
             <button
-              className={`${styles.beforeBtn} ${dark ? styles.beforeBtnDark : ''} ${hoverBefore ? styles.beforeBtnVisible : ''}`}
-              onClick={toggleBefore}
-              onMouseEnter={() => setHoverBefore(true)}
-              onMouseLeave={() => setHoverBefore(false)}
+              className={`${styles.beforeBtn} ${dark ? styles.beforeBtnDark : ''}`}
+              onClick={() => setShowBefore(prev => !prev)}
               aria-label={showBefore ? 'Show current site' : 'Show before Meshly'}
             >
-              {showBefore ? '← After' : '↗ Before'}
+              {showBefore ? 'After →' : '← Before'}
             </button>
           </div>
         </div>
 
         {/* Meta side */}
-        <div className={[
-            styles.metaSide,
-            dark  ? styles.metaSideDark  : '',
-            light ? styles.metaSideLight : '',
-          ].filter(Boolean).join(' ')}>
+        <div className={`${styles.metaSide} ${dark ? styles.metaSideDark : ''}`}>
           <div className={styles.projectMeta}>{meta}</div>
 
           <div className={styles.metrics}>
             {metrics.map((m, i) => (
-              <div key={i} className={i === 1 && metrics.length > 2 ? styles.metricAccent : ''}>
-                <Metric {...m} />
-              </div>
+              <Metric key={i} {...m} />
             ))}
           </div>
 
@@ -220,13 +168,12 @@ export default function Work() {
         ]}
         summary="Marani needed to convert tourist curiosity into actual reservations. We rebuilt the booking flow and the performance. Both went up."
         liveUrl="https://marani.pl"
-        dispatchVisible
       />
 
       <WorkPanel
         id="work-adriano"
         project="adriano"
-        light
+        dark
         bg="var(--color-adriano-bg)"
         meta="Adriano · Pizzeria Chain · Poland · 2025"
         reverse

@@ -1,9 +1,5 @@
 .section {
   padding: var(--section-pad) 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(30, 75, 190, 0.14) 0%, transparent 65%),
-    var(--color-bg-subtle);
-  border-top: 1px solid var(--color-border);
 }
 
 .inner {

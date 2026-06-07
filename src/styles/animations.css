@@ -34,13 +34,6 @@
   to   { stroke-dashoffset: 0; }
 }
 
-/* Metric count flash: muted → copper → near-black */
-@keyframes metricFlash {
-  0%   { color: var(--color-text-muted); }
-  35%  { color: var(--color-copper); }
-  100% { color: var(--color-text); }
-}
-
 /* Autonomous cursor path inside Marani mockup */
 @keyframes cursorDrift {
   0%   { transform: translate(70px,  28px); }

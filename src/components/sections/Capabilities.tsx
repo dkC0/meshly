@@ -35,15 +35,6 @@ const CAPABILITIES = [
   },
 ];
 
-const card = {
-  hidden:  { opacity: 0, y: 18 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
-  }),
-};
-
 export default function Capabilities() {
   return (
     <section id="how" className={styles.section} aria-label="How we build websites">
@@ -68,16 +59,18 @@ export default function Capabilities() {
         </motion.div>
 
         {/* Capability cards */}
-        <div className={styles.cards} role="list">
-          {CAPABILITIES.map((cap, i) => (
-            <motion.article
+        <motion.div
+          className={styles.cards}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          role="list"
+        >
+          {CAPABILITIES.map((cap) => (
+            <article
               key={cap.number}
               className={styles.card}
-              custom={i}
-              variants={card}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
               role="listitem"
             >
               <span className={styles.cardNumber}>{cap.number}</span>
@@ -88,9 +81,9 @@ export default function Capabilities() {
                   <span key={tag} className={styles.tag}>{tag}</span>
                 ))}
               </div>
-            </motion.article>
+            </article>
           ))}
-        </div>
+        </motion.div>
 
         {/* Tech stack strip */}
         <motion.div

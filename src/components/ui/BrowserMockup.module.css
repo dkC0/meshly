@@ -462,16 +462,15 @@
    ============================================================================ */
 .cursor {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--color-copper);
-  opacity: 0.85;
+  opacity: 0.7;
   pointer-events: none;
   top: 0;
   left: 0;
   will-change: transform;
-  box-shadow: 0 0 6px rgba(200,101,42,0.4);
 }
 
 .maraniCursor {

@@ -2,14 +2,13 @@
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: var(--type-label);
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-label);
+  font-size: var(--text-11);
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-pewter);
-  line-height: var(--lh-label);
+  color: var(--color-text-muted);
+  line-height: 1;
   white-space: nowrap;
-  font-variant-numeric: tabular-nums;
 }
 
 .label--dark {
