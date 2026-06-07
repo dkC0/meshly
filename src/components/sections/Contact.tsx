@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { EASE_OUT_EXPO } from '@/lib/animations';
 import styles from './Contact.module.css';
 
 const BUSINESS_TYPES = [
@@ -35,7 +36,7 @@ interface FormErrors {
 
 const fade = {
   hidden:  { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE_OUT_EXPO } },
 };
 
 export default function Contact() {
@@ -48,6 +49,7 @@ export default function Contact() {
   const [submitError, setSubmitError] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const listeningFired = useRef(false);
+  const typingStopTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleChange = useCallback((
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -62,7 +64,14 @@ export default function Contact() {
         listeningFired.current = true;
       }
       window.dispatchEvent(new CustomEvent('meshly:typing', { detail: { text: value } }));
-      window.dispatchEvent(new CustomEvent('meshly:typing-stop'));
+
+      // "Stop" only fires after a real pause — dispatching it on every
+      // keystroke contradicts "typing" in the same breath and makes the
+      // nav preview flicker instead of settling.
+      if (typingStopTimer.current) clearTimeout(typingStopTimer.current);
+      typingStopTimer.current = setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('meshly:typing-stop'));
+      }, 800);
     }
 
     if (errors[name as keyof FormErrors]) {
@@ -78,6 +87,7 @@ export default function Contact() {
 
   const handleBlur = useCallback(() => {
     listeningFired.current = false;
+    if (typingStopTimer.current) clearTimeout(typingStopTimer.current);
     window.dispatchEvent(new CustomEvent('meshly:typing-stop'));
   }, []);
 
@@ -170,7 +180,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, delay: 0.15, ease: EASE_OUT_EXPO }}
         >
           {submitted ? (
             <div className={styles.success} role="status">

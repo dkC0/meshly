@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
       await resend.emails.send({
-        from: 'Meshly <onboarding@resend.dev>',
+        from: 'Meshly <hello@meshly.pl>',
         to: process.env.CONTACT_TO_EMAIL!,
         subject: `New project inquiry${businessType ? ` — ${businessType}` : ''}`,
         text:
