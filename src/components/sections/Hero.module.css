@@ -1,3 +1,7 @@
+/* ============================================================================
+   HERO — Meshly is the star. Multi-industry auto-cycling showcase.
+   ============================================================================ */
+
 .hero {
   min-height: 100svh;
   padding-top: var(--nav-height);
@@ -7,6 +11,14 @@
   justify-content: center;
   gap: var(--sp-40);
   overflow: hidden;
+  position: relative;
+}
+
+/* Interactive mesh substrate */
+.mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 /* -------------------------------------------------------------------------
@@ -17,15 +29,17 @@
   padding: 0 var(--content-gutter);
   max-width: var(--content-w);
   width: 100%;
-  min-height: 4rem;
+  min-height: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 
 .headline {
   font-family: var(--font-display);
-  font-size: var(--text-hero);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
   font-weight: 400;
   font-style: italic;
   letter-spacing: -0.025em;
@@ -36,20 +50,103 @@
 }
 
 /* -------------------------------------------------------------------------
-   Mockup
+   Showcase — large cycling mockup
    ------------------------------------------------------------------------- */
-.mockupWrapper {
-  width: calc(100% - 4rem);
-  max-width: 1120px;
+.showcaseWrapper {
+  width: calc(100% - 6rem);
+  max-width: 1380px;
+  position: relative;
+  z-index: 1;
 }
 
 .mockup {
   width: 100%;
+  /* Subtle lift shadow — depth on dark */
+  filter: drop-shadow(0 32px 64px rgba(0, 0, 0, 0.55));
 }
 
 @media (max-width: 767px) {
-  .headlineWrapper { min-height: 3rem; }
-  .mockupWrapper   { width: calc(100% - 2.5rem); }
+  .showcaseWrapper { width: calc(100% - 2.5rem); }
+}
+
+/* -------------------------------------------------------------------------
+   Industry selector + progress
+   ------------------------------------------------------------------------- */
+.selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-12);
+  width: 100%;
+  max-width: var(--content-w);
+  padding: 0 var(--content-gutter);
+  position: relative;
+  z-index: 1;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tab {
+  font-family: var(--font-body);
+  font-size: var(--text-13);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  padding: var(--sp-8) var(--sp-16);
+  cursor: pointer;
+  transition: color var(--dur-fast);
+  white-space: nowrap;
+  position: relative;
+}
+
+.tab::after {
+  content: '·';
+  position: absolute;
+  right: 0;
+  color: var(--color-text-muted);
+  opacity: 0.3;
+}
+
+.tab:last-child::after { display: none; }
+
+.tab:hover { color: var(--color-text-secondary); }
+
+.tabActive {
+  color: var(--color-text);
+}
+
+/* Progress track */
+.progressTrack {
+  width: 120px;
+  height: 1.5px;
+  background: var(--color-border);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-copper);
+  border-radius: 1px;
+  animation: progressFill 5s linear forwards;
+}
+
+.progressPaused {
+  animation: none;
+  width: 100%;
+  opacity: 0.4;
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
 
 /* -------------------------------------------------------------------------
@@ -62,13 +159,15 @@
   gap: var(--sp-16);
   text-align: center;
   padding: 0 var(--content-gutter);
-  padding-bottom: var(--sp-64);
+  padding-bottom: var(--sp-56);
+  position: relative;
+  z-index: 1;
 }
 
 .descriptor {
   font-family: var(--font-body);
   font-size: var(--text-15);
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
   margin: 0;
 }
 
@@ -100,3 +199,8 @@
   transition: opacity var(--dur-fast);
 }
 .ctaPrimary:hover { opacity: 0.75; }
+
+@media (max-width: 767px) {
+  .headlineWrapper { min-height: 4rem; }
+  .headline { font-size: clamp(1.75rem, 8vw, 2.5rem); }
+}

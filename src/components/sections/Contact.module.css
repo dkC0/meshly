@@ -35,7 +35,6 @@
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 400;
-  font-style: normal;
   letter-spacing: -0.025em;
   line-height: 1.1;
   color: var(--color-text);
@@ -112,7 +111,7 @@ a.contactValue:hover { color: var(--color-copper); }
 .label {
   font-family: var(--font-body);
   font-size: var(--text-13);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-text);
 }
 
@@ -121,14 +120,14 @@ a.contactValue:hover { color: var(--color-copper); }
   font-family: var(--font-body);
   font-size: 16px;
   color: var(--color-text);
-  background: var(--color-bg-elevated);
+  background: rgba(248, 250, 252, 0.04);
   border: 1.5px solid var(--color-border);
   border-radius: 6px;
   padding: 12px 14px;
   width: 100%;
   appearance: none;
   -webkit-appearance: none;
-  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
 }
 
 .select option {
@@ -142,6 +141,7 @@ a.contactValue:hover { color: var(--color-copper); }
 .select:focus {
   outline: none;
   border-color: var(--color-copper);
+  background: rgba(248, 250, 252, 0.06);
   box-shadow: 0 0 0 3px var(--color-copper-muted);
 }
 
@@ -166,9 +166,7 @@ a.contactValue:hover { color: var(--color-copper); }
   color: #C84B31;
 }
 
-/* -------------------------------------------------------------------------
-   Submit button
-   ------------------------------------------------------------------------- */
+/* Submit button — feels physical */
 .submit {
   font-family: var(--font-body);
   font-size: 16px;
@@ -180,16 +178,23 @@ a.contactValue:hover { color: var(--color-copper); }
   padding: 14px 24px;
   cursor: pointer;
   width: 100%;
-  transition: opacity var(--dur-fast);
   min-height: 52px;
+  transition: opacity var(--dur-fast), transform var(--dur-fast) var(--ease-out);
 }
 
-.submit:hover:not(:disabled) { opacity: 0.88; }
+.submit:hover:not(:disabled) {
+  opacity: 0.90;
+  transform: translateY(-1px);
+}
+
+.submit:active:not(:disabled) {
+  transform: translateY(0);
+  opacity: 1;
+}
+
 .submit:disabled { opacity: 0.45; cursor: not-allowed; }
 
-/* -------------------------------------------------------------------------
-   Success state
-   ------------------------------------------------------------------------- */
+/* Success */
 .success {
   display: flex;
   flex-direction: column;
@@ -216,9 +221,6 @@ a.contactValue:hover { color: var(--color-copper); }
   margin: 0;
 }
 
-/* -------------------------------------------------------------------------
-   Responsive
-   ------------------------------------------------------------------------- */
 @media (max-width: 1023px) {
   .inner { grid-template-columns: 1fr; gap: var(--sp-48); }
   .left  { position: static; }

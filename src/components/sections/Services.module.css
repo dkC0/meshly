@@ -24,7 +24,7 @@
 }
 
 /* -------------------------------------------------------------------------
-   Menu — restaurant-style pricing list
+   Menu — each row lifts on hover
    ------------------------------------------------------------------------- */
 .menu {
   display: flex;
@@ -36,13 +36,18 @@
   justify-content: space-between;
   align-items: baseline;
   gap: var(--sp-32);
-  padding: var(--sp-20) 0;
+  padding: var(--sp-20) var(--sp-8);
   border-top: 1px solid var(--color-border-subtle);
-  transition: background var(--dur-fast);
+  transition: padding-left var(--dur-base) var(--ease-out);
+  cursor: default;
 }
 
 .row:last-child {
   border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.row:hover {
+  padding-left: var(--sp-16);
 }
 
 .serviceName {
@@ -50,6 +55,11 @@
   font-size: var(--text-17);
   font-weight: 400;
   color: var(--color-text);
+  transition: color var(--dur-fast);
+}
+
+.row:hover .serviceName {
+  color: #fff;
 }
 
 .servicePrice {
@@ -58,6 +68,11 @@
   font-weight: 400;
   color: var(--color-text-muted);
   white-space: nowrap;
+  transition: color var(--dur-fast);
+}
+
+.row:hover .servicePrice {
+  color: var(--color-text-secondary);
 }
 
 .note {
@@ -74,8 +89,5 @@
   .eyebrow { font-size: var(--text-32); }
   .note    { font-size: var(--text-17); }
   .row     { flex-direction: column; gap: var(--sp-4); }
-  .servicePrice {
-    font-size: var(--text-11);
-    color: var(--color-copper);
-  }
+  .servicePrice { font-size: var(--text-11); color: var(--color-copper); }
 }

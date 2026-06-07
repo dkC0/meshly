@@ -71,7 +71,7 @@ export default function Work() {
           ))}
         </div>
 
-        {/* Showcase — large mockup */}
+        {/* Showcase — large mockup with premium hover border */}
         <div className={styles.showcase}>
           <AnimatePresence mode="wait">
             <motion.div
@@ -82,7 +82,9 @@ export default function Work() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <BrowserMockup project={active} className={styles.mockup} />
+              <div className={styles.mockupFrame}>
+                <BrowserMockup project={active} className={styles.mockup} />
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>

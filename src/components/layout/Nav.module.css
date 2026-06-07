@@ -5,9 +5,9 @@
   right: 0;
   height: var(--nav-height);
   z-index: 1000;
-  background: rgba(248, 248, 246, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(9, 14, 28, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   transition: box-shadow var(--dur-base);
 }
 
@@ -95,7 +95,7 @@
   width: 0;
   height: 1px;
   background: var(--color-text);
-  transition: width var(--dur-fast) var(--ease-out);
+  transition: width var(--dur-base) var(--ease-out);
 }
 
 .link:hover { color: var(--color-text); }
@@ -134,7 +134,7 @@
 .bar2Open { transform: rotate(-45deg) translate(4px, -4px); }
 
 @media (max-width: 767px) {
-  .links    { display: none; }
+  .links     { display: none; }
   .hamburger { display: flex; }
 }
 
@@ -164,7 +164,7 @@
   font-family: var(--font-display);
   font-size: clamp(2rem, 8vw, 2.5rem);
   font-weight: 400;
-  color: #E8E5E0;
+  color: var(--color-text);
   text-decoration: none;
   letter-spacing: -0.025em;
   transition: color var(--dur-fast);
@@ -186,7 +186,7 @@
   bottom: var(--sp-32);
   font-family: var(--font-mono);
   font-size: var(--text-11);
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--color-text-muted);
   letter-spacing: 0.06em;
   text-align: center;
 }

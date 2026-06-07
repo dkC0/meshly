@@ -27,7 +27,7 @@
   font-family: var(--font-body);
   font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 800;
-  color: #E8E5E0;
+  color: var(--color-text);
   line-height: 1;
   will-change: transform, opacity;
   letter-spacing: 0.18em;
@@ -37,7 +37,7 @@
   width: 100%;
   max-width: 260px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--color-border);
   transform-origin: left center;
 }
 
@@ -59,7 +59,7 @@
   font-family: var(--font-body);
   font-size: var(--text-13);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-secondary);
   text-align: left;
 }
 

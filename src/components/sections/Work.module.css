@@ -1,10 +1,11 @@
 /* ============================================================================
-   WORK SHOWCASE — Dark surface, 6-category tab switcher
+   WORK SHOWCASE — Dark, cinematic, tab-based
    ============================================================================ */
 
 .section {
-  background: var(--color-bg-dark);
+  background: var(--color-bg-subtle);
   padding: var(--section-pad) 0;
+  position: relative;
 }
 
 .inner {
@@ -40,7 +41,7 @@
   font-style: italic;
   letter-spacing: -0.02em;
   line-height: 1.15;
-  color: #E8E5E0;
+  color: var(--color-text);
   margin: 0;
 }
 
@@ -49,41 +50,37 @@
    ------------------------------------------------------------------------- */
 .tabs {
   display: flex;
-  gap: 0;
   flex-wrap: wrap;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .tab {
   font-family: var(--font-body);
   font-size: var(--text-13);
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.38);
+  color: var(--color-text-muted);
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
   padding: var(--sp-12) var(--sp-20);
   cursor: pointer;
-  transition: color var(--dur-fast), border-color var(--dur-fast);
+  transition: color var(--dur-fast), border-color var(--dur-base);
   margin-bottom: -1px;
   white-space: nowrap;
 }
 
-.tab:hover {
-  color: rgba(255, 255, 255, 0.7);
-}
+.tab:hover { color: var(--color-text-secondary); }
 
 .tabActive {
-  color: #E8E5E0;
+  color: var(--color-text);
   border-bottom-color: var(--color-copper);
 }
 
 /* -------------------------------------------------------------------------
-   Showcase — large mockup
+   Showcase
    ------------------------------------------------------------------------- */
 .showcase {
   width: 100%;
-  position: relative;
 }
 
 .mockupWrap {
@@ -92,10 +89,37 @@
 
 .mockup {
   width: 100%;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.5));
+  transition: filter var(--dur-slow);
+}
+
+.mockupWrap:hover .mockup {
+  filter: drop-shadow(0 32px 64px rgba(0, 0, 0, 0.65));
+}
+
+/* Premium hover border on mockup frame */
+.mockupFrame {
+  position: relative;
+  border-radius: 12px;
+}
+
+.mockupFrame::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 11px;
+  border: 1px solid rgba(248, 250, 252, 0);
+  transition: border-color var(--dur-slow) var(--ease-out);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.mockupFrame:hover::after {
+  border-color: var(--color-border-hover);
 }
 
 /* -------------------------------------------------------------------------
-   Caption row
+   Caption
    ------------------------------------------------------------------------- */
 .caption {
   display: flex;
@@ -109,7 +133,7 @@
   font-family: var(--font-body);
   font-size: var(--text-17);
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--color-text-secondary);
   margin: 0;
   max-width: 56ch;
 }
@@ -120,21 +144,27 @@
   font-weight: 600;
   color: var(--color-copper);
   white-space: nowrap;
-  transition: opacity var(--dur-fast);
   flex-shrink: 0;
+  transition: opacity var(--dur-fast);
+  position: relative;
+  padding-bottom: 1px;
 }
 
-.cta:hover { opacity: 0.75; }
+.cta::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-copper);
+  transition: width var(--dur-base) var(--ease-out);
+}
+
+.cta:hover { opacity: 0.85; }
+.cta:hover::after { width: 100%; }
 
 @media (max-width: 767px) {
-  .caption {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--sp-16);
-  }
-
-  .tab {
-    padding: var(--sp-8) var(--sp-12);
-    font-size: var(--text-11);
-  }
+  .caption { flex-direction: column; align-items: flex-start; gap: var(--sp-16); }
+  .tab     { padding: var(--sp-8) var(--sp-12); font-size: var(--text-11); }
 }

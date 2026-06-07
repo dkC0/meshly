@@ -4,26 +4,27 @@
 
 :root {
   /* -------------------------------------------------------------------------
-     COLOR — Light Surface System
+     COLOR — Dark Canvas System
      ------------------------------------------------------------------------- */
 
-  --color-bg:            #F8F8F6;   /* warm off-white — primary background */
-  --color-bg-subtle:     #F0F0EE;   /* slightly recessed surfaces */
-  --color-bg-elevated:   #FFFFFF;   /* inputs, cards */
-  --color-bg-dark:       #151515;   /* work showcase, footer */
+  --color-bg:            #090E1C;   /* ink navy — primary canvas */
+  --color-bg-subtle:     #111827;   /* secondary surface */
+  --color-bg-elevated:   #141E35;   /* cards, panels */
+  --color-bg-dark:       #060810;   /* deepest — loader, footer */
 
   /* Text */
-  --color-text:          #111111;
-  --color-text-secondary:#666666;
-  --color-text-muted:    #999999;
+  --color-text:          #F8FAFC;
+  --color-text-secondary:#94A3B8;
+  --color-text-muted:    #4E5E80;
 
   /* Accent — earned, not decorative */
-  --color-copper:        #C46A2F;
-  --color-copper-muted:  rgba(196, 106, 47, 0.10);
+  --color-copper:        #C9733D;
+  --color-copper-muted:  rgba(201, 115, 61, 0.12);
 
-  /* Borders — dark hairlines on light */
-  --color-border:        rgba(17, 17, 17, 0.10);
-  --color-border-subtle: rgba(17, 17, 17, 0.06);
+  /* Borders — warm light on dark */
+  --color-border:        rgba(248, 250, 252, 0.08);
+  --color-border-subtle: rgba(248, 250, 252, 0.05);
+  --color-border-hover:  rgba(248, 250, 252, 0.20);
 
   /* -------------------------------------------------------------------------
      TYPOGRAPHY
@@ -87,12 +88,12 @@
   --dur-crawl:  800ms;
 
   /* -------------------------------------------------------------------------
-     SHADOWS — optimised for light surface
+     SHADOWS — depth on dark
      ------------------------------------------------------------------------- */
-  --shadow-sm: 0 1px 4px  rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
-  --shadow-lg: 0 16px 56px rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.15);
+  --shadow-sm: 0 1px 4px  rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.40);
+  --shadow-lg: 0 16px 56px rgba(0, 0, 0, 0.50);
+  --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.60);
 }
 
 @media (prefers-reduced-motion: reduce) {
