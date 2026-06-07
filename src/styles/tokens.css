@@ -1,36 +1,29 @@
 /* ==========================================================================
-   MESHLY — Design Tokens — Deep Navy
+   MESHLY — Design Tokens
    ========================================================================== */
 
 :root {
   /* -------------------------------------------------------------------------
-     COLOR — Deep Navy Canvas
-     Signal Copper is still used only on client results.
+     COLOR — Light Surface System
      ------------------------------------------------------------------------- */
 
-  /* Navy canvas system */
-  --color-bg:            #090E1C;   /* ink navy — primary background */
-  --color-bg-subtle:     #0D1325;   /* slightly lighter for sections */
-  --color-bg-elevated:   #141E35;   /* cards, form fields */
-  --color-bg-dark:       #060810;   /* darkest — hero, footer */
+  --color-bg:            #F8F8F6;   /* warm off-white — primary background */
+  --color-bg-subtle:     #F0F0EE;   /* slightly recessed surfaces */
+  --color-bg-elevated:   #FFFFFF;   /* inputs, cards */
+  --color-bg-dark:       #151515;   /* work showcase, footer */
 
-  /* Text — warm near-white with blue cast */
-  --color-text:          #DDE4F5;
-  --color-text-secondary:#8493B8;
-  --color-text-muted:    #4E5E80;
+  /* Text */
+  --color-text:          #111111;
+  --color-text-secondary:#666666;
+  --color-text-muted:    #999999;
 
-  /* Signal Copper — results only, never decoration */
-  --color-copper:        #D4743A;
-  --color-copper-muted:  rgba(212,116,58,0.12);
+  /* Accent — earned, not decorative */
+  --color-copper:        #C46A2F;
+  --color-copper-muted:  rgba(196, 106, 47, 0.10);
 
-  /* Borders — light on dark */
-  --color-border:        rgba(221,228,245,0.08);
-  --color-border-subtle: rgba(221,228,245,0.05);
-
-  /* Project palette — each project keeps its brand color */
-  --color-marani-bg:     #1C1410;
-  --color-adriano-bg:    #0D0B07;
-  --color-vantage-bg:    #0A0D1A;
+  /* Borders — dark hairlines on light */
+  --color-border:        rgba(17, 17, 17, 0.10);
+  --color-border-subtle: rgba(17, 17, 17, 0.06);
 
   /* -------------------------------------------------------------------------
      TYPOGRAPHY
@@ -72,7 +65,7 @@
   --sp-120: 7.5rem;
   --sp-160: 10rem;
 
-  --section-pad: clamp(5rem, 10vw, 10rem);
+  --section-pad: clamp(5rem, 10vw, 9rem);
   --nav-height:  64px;
 
   /* -------------------------------------------------------------------------
@@ -87,7 +80,6 @@
   --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
   --ease-inout:  cubic-bezier(0.83, 0, 0.17, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --dur-fast:   150ms;
   --dur-base:   300ms;
@@ -95,12 +87,12 @@
   --dur-crawl:  800ms;
 
   /* -------------------------------------------------------------------------
-     SHADOWS — adapted for dark background
+     SHADOWS — optimised for light surface
      ------------------------------------------------------------------------- */
-  --shadow-sm: 0 1px 4px  rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
-  --shadow-lg: 0 16px 56px rgba(0,0,0,0.5);
-  --shadow-xl: 0 32px 80px rgba(0,0,0,0.6);
+  --shadow-sm: 0 1px 4px  rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 16px 56px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 32px 80px rgba(0, 0, 0, 0.15);
 }
 
 @media (prefers-reduced-motion: reduce) {

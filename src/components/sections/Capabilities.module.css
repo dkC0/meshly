@@ -1,11 +1,5 @@
-/* ============================================================================
-   CAPABILITIES
-   ============================================================================ */
-
 .section {
   padding: var(--section-pad) 0;
-  position: relative;
-  overflow: hidden;
 }
 
 .inner {
@@ -30,7 +24,6 @@
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--text-11);
-  font-weight: 400;
   color: var(--color-copper);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -56,7 +49,7 @@
 }
 
 /* -------------------------------------------------------------------------
-   Cards grid — 2 × 2 on desktop
+   Cards — 2×2 unified grid
    ------------------------------------------------------------------------- */
 .cards {
   display: grid;
@@ -69,14 +62,12 @@
 }
 
 @media (max-width: 767px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
+  .cards { grid-template-columns: 1fr; }
 }
 
 .card {
   background: var(--color-bg);
-  padding: var(--sp-32);
+  padding: var(--sp-40);
   display: flex;
   flex-direction: column;
   gap: var(--sp-16);
@@ -84,7 +75,7 @@
 }
 
 .card:hover {
-  background: rgba(221, 228, 245, 0.03);
+  background: var(--color-bg-elevated);
 }
 
 .cardNumber {
@@ -92,16 +83,14 @@
   font-size: var(--text-11);
   color: var(--color-copper);
   letter-spacing: 0.1em;
-  font-weight: 400;
 }
 
 .cardTitle {
   font-family: var(--font-body);
-  font-size: var(--text-20);
+  font-size: var(--text-17);
   font-weight: 600;
   color: var(--color-text);
-  letter-spacing: -0.01em;
-  line-height: 1.25;
+  line-height: 1.35;
   margin: 0;
 }
 
@@ -128,52 +117,10 @@
   font-family: var(--font-mono);
   font-size: var(--text-10);
   color: var(--color-text-muted);
-  background: rgba(221, 228, 245, 0.04);
+  background: rgba(17, 17, 17, 0.04);
   border: 1px solid var(--color-border-subtle);
   border-radius: 100px;
   padding: 3px 10px;
   letter-spacing: 0.04em;
   white-space: nowrap;
-}
-
-/* -------------------------------------------------------------------------
-   Tech stack strip
-   ------------------------------------------------------------------------- */
-.stackRow {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-20);
-  flex-wrap: wrap;
-}
-
-.stackLabel {
-  font-family: var(--font-mono);
-  font-size: var(--text-11);
-  color: var(--color-text-muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.stackPills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-8);
-}
-
-.pill {
-  font-family: var(--font-body);
-  font-size: var(--text-13);
-  font-weight: 400;
-  color: var(--color-text-muted);
-  background: rgba(221, 228, 245, 0.04);
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 100px;
-  padding: 5px 14px;
-  transition: border-color var(--dur-fast), color var(--dur-fast);
-}
-
-.pill:hover {
-  border-color: rgba(221, 228, 245, 0.2);
-  color: var(--color-text-secondary);
 }

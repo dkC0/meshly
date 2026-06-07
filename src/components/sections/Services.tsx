@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import styles from './Services.module.css';
 
 const SERVICES = [
-  { name: 'Website Design & Build',     price: '€2,500 – €6,000'     },
-  { name: 'Performance Audit',           price: '€500 – €1,200'       },
-  { name: 'Brand + Digital Identity',    price: '€1,200 – €3,000'     },
-  { name: 'Ongoing Partnership',         price: 'from €400/month'     },
+  { name: 'Website Design & Development', price: '€2,500 – €6,000'  },
+  { name: 'Brand & Visual Identity',       price: '€1,200 – €3,000'  },
+  { name: 'Website Refresh',               price: '€800 – €2,500'    },
+  { name: 'Ongoing Care & Updates',        price: 'from €300/month'  },
 ];
 
 const containerVariants = {

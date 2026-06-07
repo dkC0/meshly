@@ -10,14 +10,14 @@
 }
 
 /* -------------------------------------------------------------------------
-   Headline — centered, transforms from claim → proof on scroll
+   Headline
    ------------------------------------------------------------------------- */
 .headlineWrapper {
   text-align: center;
   padding: 0 var(--content-gutter);
   max-width: var(--content-w);
   width: 100%;
-  min-height: 6rem;
+  min-height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,16 +35,12 @@
   text-align: center;
 }
 
-@media (max-width: 767px) {
-  .headlineWrapper { min-height: 4.5rem; }
-}
-
 /* -------------------------------------------------------------------------
-   Mockup — bleeds horizontally past the content column
+   Mockup
    ------------------------------------------------------------------------- */
 .mockupWrapper {
   width: calc(100% - 4rem);
-  max-width: 1200px;
+  max-width: 1120px;
 }
 
 .mockup {
@@ -52,13 +48,12 @@
 }
 
 @media (max-width: 767px) {
-  .mockupWrapper {
-    width: calc(100% - 2.5rem);
-  }
+  .headlineWrapper { min-height: 3rem; }
+  .mockupWrapper   { width: calc(100% - 2.5rem); }
 }
 
 /* -------------------------------------------------------------------------
-   Footer row — descriptor + CTAs
+   Footer row
    ------------------------------------------------------------------------- */
 .footer {
   display: flex;
@@ -73,7 +68,6 @@
 .descriptor {
   font-family: var(--font-body);
   font-size: var(--text-15);
-  font-weight: 400;
   color: var(--color-text-secondary);
   margin: 0;
 }
@@ -88,11 +82,10 @@
   font-family: var(--font-body);
   font-size: var(--text-13);
   font-weight: 500;
-  color: var(--color-text);
-  text-decoration: none;
-  transition: opacity var(--dur-fast);
+  color: var(--color-text-secondary);
+  transition: color var(--dur-fast);
 }
-.ctaSecondary:hover { opacity: 0.6; }
+.ctaSecondary:hover { color: var(--color-text); }
 
 .ctaDivider {
   color: var(--color-text-muted);
@@ -102,9 +95,8 @@
 .ctaPrimary {
   font-family: var(--font-body);
   font-size: var(--text-13);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-copper);
-  text-decoration: none;
   transition: opacity var(--dur-fast);
 }
-.ctaPrimary:hover { opacity: 0.7; }
+.ctaPrimary:hover { opacity: 0.75; }

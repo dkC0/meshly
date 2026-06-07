@@ -3,44 +3,38 @@
 import { motion } from 'framer-motion';
 import styles from './Capabilities.module.css';
 
-const STACK = [
-  'Next.js', 'TypeScript', 'Framer Motion', 'CSS Modules',
-  'Node.js', 'Vercel', 'Figma', 'Lighthouse',
-];
-
 const CAPABILITIES = [
   {
     number: '01',
-    title:  'Custom-coded from scratch',
-    body:   'No page builders. No WordPress templates. Every site is written in Next.js and TypeScript — the same stack used by Vercel, Linear, and Loom. Your website loads in under 2 seconds because the code is lean by design.',
-    tags:   ['Next.js 14', 'TypeScript', 'SSR / SSG'],
+    title:  'Built for your business, not borrowed from someone else\'s',
+    body:   'We don\'t use templates. Every website is designed and built specifically for you — so it reflects your business accurately, loads quickly, and keeps working years from now without needing constant attention.',
+    tags:   ['No templates', 'Fully custom', 'Built to last'],
   },
   {
     number: '02',
-    title:  'Designed for conversion',
-    body:   'Beautiful is not enough. Every layout decision is made with the visitor\'s journey in mind — what they need to see, in what order, and what should make them contact you. Form follows function.',
-    tags:   ['UX Design', 'Conversion', 'Information Architecture'],
+    title:  'Every page is designed to get you clients',
+    body:   'Beautiful is not enough. We design the exact sequence of what visitors see and when — so they contact you, not your competitor. Every layout decision is made with your customer in mind.',
+    tags:   ['Clear messaging', 'Easy to contact you', 'Built to convert'],
   },
   {
     number: '03',
-    title:  'Performance as a feature',
-    body:   'A site that scores 98/100 on PageSpeed ranks higher on Google, loads faster on mobile, and keeps visitors from bouncing. We optimise images, fonts, and code so performance is built in, not bolted on.',
-    tags:   ['Core Web Vitals', 'SEO', 'Image Optimisation'],
+    title:  'Fast enough that people actually stay',
+    body:   'Slow websites cost you customers before they even see what you offer. Every site we build loads in under two seconds on mobile — which means visitors stay, read, and reach out.',
+    tags:   ['Loads fast on mobile', 'Ranks on Google', 'No bloat'],
   },
   {
     number: '04',
-    title:  'One person, full accountability',
-    body:   'No handoffs between designers and developers. No account managers in the middle. You talk directly to the person building your site, which means fewer misunderstandings and faster decisions.',
-    tags:   ['Direct Communication', 'Warsaw', '4 Countries'],
+    title:  'One person. Full accountability.',
+    body:   'No agencies. No account managers. No handoffs. You work directly with the founder — the same person designing and building your website — which means faster decisions and no miscommunication.',
+    tags:   ['Direct access', 'Warsaw-based', 'Working in 4 countries'],
   },
 ];
 
 export default function Capabilities() {
   return (
-    <section id="how" className={styles.section} aria-label="How we build websites">
+    <section id="how" className={styles.section} aria-label="How we work">
       <div className={styles.inner}>
 
-        {/* Header */}
         <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: 12 }}
@@ -48,17 +42,15 @@ export default function Capabilities() {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className={styles.eyebrow}>How we build</span>
+          <span className={styles.eyebrow}>How we work</span>
           <h2 className={styles.title}>
-            Websites built the way<br />serious businesses deserve.
+            Websites that actually work<br />for your business.
           </h2>
           <p className={styles.intro}>
-            Every Meshly project is hand-coded, performance-tested, and designed
-            around your business goals — not a template someone else used first.
+            Every project is hand-built around what your specific business needs to do online — not what worked for someone else.
           </p>
         </motion.div>
 
-        {/* Capability cards */}
         <motion.div
           className={styles.cards}
           initial={{ opacity: 0, y: 16 }}
@@ -68,11 +60,7 @@ export default function Capabilities() {
           role="list"
         >
           {CAPABILITIES.map((cap) => (
-            <article
-              key={cap.number}
-              className={styles.card}
-              role="listitem"
-            >
+            <article key={cap.number} className={styles.card} role="listitem">
               <span className={styles.cardNumber}>{cap.number}</span>
               <h3 className={styles.cardTitle}>{cap.title}</h3>
               <p className={styles.cardBody}>{cap.body}</p>
@@ -83,23 +71,6 @@ export default function Capabilities() {
               </div>
             </article>
           ))}
-        </motion.div>
-
-        {/* Tech stack strip */}
-        <motion.div
-          className={styles.stackRow}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          aria-label="Technology stack"
-        >
-          <span className={styles.stackLabel}>Built with</span>
-          <div className={styles.stackPills}>
-            {STACK.map(tech => (
-              <span key={tech} className={styles.pill}>{tech}</span>
-            ))}
-          </div>
         </motion.div>
 
       </div>

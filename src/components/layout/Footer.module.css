@@ -1,5 +1,5 @@
 .footer {
-  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-dark);
   padding: var(--sp-48) 0;
 }
 
@@ -26,7 +26,7 @@
   font-family: var(--font-display);
   font-size: 1.0625rem;
   font-weight: 400;
-  color: var(--color-text);
+  color: #E8E5E0;
   letter-spacing: -0.01em;
 }
 
@@ -41,7 +41,7 @@
 .location {
   font-family: var(--font-mono);
   font-size: var(--text-11);
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.3);
   letter-spacing: 0.05em;
 }
 
@@ -54,11 +54,10 @@
 .link {
   font-family: var(--font-body);
   font-size: var(--text-13);
-  color: var(--color-text-secondary);
-  text-decoration: none;
+  color: rgba(255, 255, 255, 0.4);
   transition: color var(--dur-fast);
 }
-.link:hover { color: var(--color-text); }
+.link:hover { color: #E8E5E0; }
 
 .right {
   display: flex;
@@ -70,15 +69,14 @@
 .copy {
   font-family: var(--font-mono);
   font-size: var(--text-11);
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.25);
   letter-spacing: 0.04em;
 }
 
 .built {
   font-family: var(--font-mono);
   font-size: var(--text-10);
-  color: var(--color-text-muted);
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.18);
   font-style: italic;
   letter-spacing: 0.02em;
 }

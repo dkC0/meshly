@@ -1,16 +1,13 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: var(--color-bg);
+  background: var(--color-bg-dark);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* -------------------------------------------------------------------------
-   Content block — centered
-   ------------------------------------------------------------------------- */
 .content {
   display: flex;
   flex-direction: column;
@@ -19,9 +16,6 @@
   text-align: center;
 }
 
-/* -------------------------------------------------------------------------
-   MESHLY wordmark — letters stagger in
-   ------------------------------------------------------------------------- */
 .wordmark {
   display: flex;
   align-items: baseline;
@@ -33,27 +27,20 @@
   font-family: var(--font-body);
   font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 800;
-  font-style: normal;
-  color: var(--color-text);
+  color: #E8E5E0;
   line-height: 1;
   will-change: transform, opacity;
   letter-spacing: 0.18em;
 }
 
-/* -------------------------------------------------------------------------
-   Hairline rule — extends after letters complete
-   ------------------------------------------------------------------------- */
 .rule {
   width: 100%;
   max-width: 260px;
   height: 1px;
-  background: var(--color-border);
+  background: rgba(255, 255, 255, 0.12);
   transform-origin: left center;
 }
 
-/* -------------------------------------------------------------------------
-   Result lines — client / result pairs
-   ------------------------------------------------------------------------- */
 .results {
   display: flex;
   flex-direction: column;
@@ -72,12 +59,12 @@
   font-family: var(--font-body);
   font-size: var(--text-13);
   font-weight: 400;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.4);
   text-align: left;
 }
 
 .result {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   font-size: var(--text-13);
   font-weight: 400;
   color: var(--color-copper);

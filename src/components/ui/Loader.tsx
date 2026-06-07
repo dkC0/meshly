@@ -7,9 +7,9 @@ import styles from './Loader.module.css';
 const LETTERS  = ['M', 'E', 'S', 'H', 'L', 'Y'];
 const LETTER_DELAY = 90; // ms per letter
 const RESULTS = [
-  { client: 'Marani',  result: '+34% bookings' },
-  { client: 'Adriano', result: '2.1s LCP'       },
-  { client: 'Vantage', result: '+58% inquiries'  },
+  { client: 'Marani',  result: 'more bookings'  },
+  { client: 'Adriano', result: 'more orders'    },
+  { client: 'Vantage', result: 'more clients'   },
 ];
 
 export default function Loader() {

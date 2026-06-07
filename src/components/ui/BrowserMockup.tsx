@@ -3,28 +3,37 @@
 import { useRef, useEffect, useState } from 'react';
 import styles from './BrowserMockup.module.css';
 
+export type ProjectId =
+  | 'marani'
+  | 'restaurant'
+  | 'lawfirm'
+  | 'barbershop'
+  | 'hotel'
+  | 'construction'
+  | 'localbusiness';
+
 interface BrowserMockupProps {
-  project: 'marani' | 'adriano' | 'vantage';
+  project:     ProjectId;
   showBefore?: boolean;
-  className?: string;
+  className?:  string;
 }
 
-const PROJECT_URLS: Record<string, string> = {
-  marani:  'marani.pl',
-  adriano: 'adriano.com.pl',
-  vantage: 'vantageservices.eu',
+const PROJECT_URLS: Record<ProjectId, string> = {
+  marani:        'marani.pl',
+  restaurant:    'emilia-restaurant.pl',
+  lawfirm:       'kowalski-partners.pl',
+  barbershop:    'theblade.pl',
+  hotel:         'hotelbellmont.pl',
+  construction:  'budmar.pl',
+  localbusiness: 'lumiere-spa.pl',
 };
 
-const PROJECT_LABELS: Record<string, string> = {
-  marani:  'Marani Restaurant Group',
-  adriano: 'Adriano Pizzeria Chain',
-  vantage: 'Vantage Premium Services',
-};
-
+/* ============================================================================
+   EXISTING CLIENT — Marani (kept for Hero usage)
+   ============================================================================ */
 function MaraniScreen({ hovering }: { hovering: boolean }) {
   return (
     <div className={styles.maraniScreen}>
-      {/* Nav */}
       <div className={styles.maraniNav}>
         <span className={styles.maraniLogo}>MARANI</span>
         <div className={styles.maraniNavLinks}>
@@ -33,20 +42,16 @@ function MaraniScreen({ hovering }: { hovering: boolean }) {
           <span>About</span>
         </div>
       </div>
-      {/* Hero */}
       <div className={styles.maraniHero}>
         <div className={styles.maraniHeroLeft}>
           <div className={styles.maraniEyebrow}>Fine Georgian Dining</div>
           <div className={styles.maraniHeadline}>Taste of<br />Tbilisi</div>
-          <button
-            className={`${styles.maraniCta} ${hovering ? styles.maraniCtaHover : ''}`}
-          >
+          <button className={`${styles.maraniCta} ${hovering ? styles.maraniCtaHover : ''}`}>
             Reserve a table
           </button>
         </div>
         <div className={styles.maraniHeroImage} />
       </div>
-      {/* Stats strip */}
       <div className={styles.maraniStats}>
         <span>14 tables</span>
         <span>·</span>
@@ -54,83 +59,241 @@ function MaraniScreen({ hovering }: { hovering: boolean }) {
         <span>·</span>
         <span>Open daily</span>
       </div>
-      {/* Autonomous cursor dot */}
       <div className={`${styles.cursor} ${styles.maraniCursor}`} aria-hidden="true" />
     </div>
   );
 }
 
-function AdrianoScreen({ hovering }: { hovering: boolean }) {
+/* ============================================================================
+   RESTAURANT — Emilia (fine dining, warm dark)
+   ============================================================================ */
+function RestaurantScreen({ hovering }: { hovering: boolean }) {
   return (
-    <div className={styles.adrianoScreen}>
-      {/* Nav */}
-      <div className={styles.adrianoNav}>
-        <span className={styles.adrianoLogo}>Adriano</span>
-        <div className={styles.adrianoNavLinks}>
+    <div className={styles.restaurantScreen}>
+      <div className={styles.restaurantNav}>
+        <span className={styles.restaurantLogo}>EMILIA</span>
+        <div className={styles.restaurantNavLinks}>
           <span>Menu</span>
-          <span>Locations</span>
-          <span>Order</span>
+          <span>Wine</span>
+          <span>Reserve</span>
         </div>
       </div>
-      {/* Hero */}
-      <div className={styles.adrianoHero}>
-        <div className={styles.adrianoHeroContent}>
-          <div className={styles.adrianoEyebrow}>Authentic</div>
-          <div className={styles.adrianoHeadline}>Pizza</div>
-          <div className={styles.adrianoSub}>From Warsaw, for Warsaw</div>
-          <div
-            className={`${styles.adrianoCta} ${hovering ? styles.adrianoCtaHover : ''}`}
-          >
-            Find nearest location →
-          </div>
+      <div className={styles.restaurantHero}>
+        <div className={styles.restaurantHeroLeft}>
+          <div className={styles.restaurantEyebrow}>Seasonal Italian — Warsaw</div>
+          <div className={styles.restaurantHeadline}>Where every<br />dish is a story.</div>
+          <button className={`${styles.restaurantCta} ${hovering ? styles.restaurantCtaHover : ''}`}>
+            Reserve tonight
+          </button>
         </div>
-        <div className={styles.adrianoHeroImage} />
+        <div className={styles.restaurantHeroImage} />
       </div>
-      {/* Location cards */}
-      <div className={styles.adrianoLocations}>
-        {['Śródmieście', 'Mokotów', 'Wola'].map(name => (
-          <div key={name} className={styles.adrianoCard}>{name}</div>
-        ))}
+      <div className={styles.restaurantBar}>
+        <span>48 covers</span>
+        <span>·</span>
+        <span>Private dining</span>
+        <span>·</span>
+        <span>Open Tue – Sun</span>
       </div>
-      <div className={`${styles.cursor} ${styles.adrianoCursor}`} aria-hidden="true" />
+      <div className={`${styles.cursor} ${styles.restaurantCursor}`} aria-hidden="true" />
     </div>
   );
 }
 
-function VantageScreen({ hovering }: { hovering: boolean }) {
+/* ============================================================================
+   LAW FIRM — Kowalski & Partners (dark charcoal, authoritative)
+   ============================================================================ */
+function LawFirmScreen({ hovering }: { hovering: boolean }) {
   return (
-    <div className={styles.vantageScreen}>
-      {/* Nav */}
-      <div className={styles.vantageNav}>
-        <span className={styles.vantageLogo}>VANTAGE</span>
-        <div className={styles.vantageNavLinks}>
-          <span>Services</span>
-          <span>About</span>
+    <div className={styles.lawScreen}>
+      <div className={styles.lawNav}>
+        <span className={styles.lawLogo}>KOWALSKI &amp; PARTNERS</span>
+        <div className={styles.lawNavLinks}>
+          <span>Practice</span>
+          <span>Team</span>
           <span>Contact</span>
         </div>
       </div>
-      {/* Hero */}
-      <div className={styles.vantageHero}>
-        <div className={styles.vantageEyebrow}>Premium</div>
-        <div className={styles.vantageHeadline}>Business<br />Solutions</div>
-        <div className={styles.vantageSub}>Strategy · Growth · Results</div>
-        <button
-          className={`${styles.vantageCta} ${hovering ? styles.vantageCtaHover : ''}`}
-        >
-          Schedule Consultation
+      <div className={styles.lawHero}>
+        <div className={styles.lawTag}>Commercial &amp; Contract Law</div>
+        <div className={styles.lawHeadline}>When the<br />decision matters most.</div>
+        <div className={styles.lawSub}>We advise businesses at every stage — from founding to acquisition.</div>
+        <button className={`${styles.lawCta} ${hovering ? styles.lawCtaHover : ''}`}>
+          Schedule a consultation
         </button>
       </div>
-      {/* Service cards */}
-      <div className={styles.vantageCards}>
-        <div className={styles.vantageCard}>Legal Advisory</div>
-        <div className={styles.vantageCard}>Corporate Strategy</div>
+      <div className={styles.lawPractice}>
+        <span className={styles.lawPracticeItem}>Corporate</span>
+        <span className={styles.lawDivider}>·</span>
+        <span className={styles.lawPracticeItem}>M&amp;A</span>
+        <span className={styles.lawDivider}>·</span>
+        <span className={styles.lawPracticeItem}>Employment</span>
+        <span className={styles.lawDivider}>·</span>
+        <span className={styles.lawPracticeItem}>Litigation</span>
       </div>
-      <div className={`${styles.cursor} ${styles.vantageCursor}`} aria-hidden="true" />
+      <div className={`${styles.cursor} ${styles.lawCursor}`} aria-hidden="true" />
     </div>
   );
 }
 
-function BeforeScreen({ project }: { project: string }) {
+/* ============================================================================
+   BARBERSHOP — The Blade (dark warm, premium grooming)
+   ============================================================================ */
+function BarbershopScreen({ hovering }: { hovering: boolean }) {
+  return (
+    <div className={styles.barberScreen}>
+      <div className={styles.barberNav}>
+        <span className={styles.barberLogo}>THE BLADE</span>
+        <div className={styles.barberNavLinks}>
+          <span>Services</span>
+          <span>Gallery</span>
+          <span>Book</span>
+        </div>
+      </div>
+      <div className={styles.barberHero}>
+        <div className={styles.barberHeroLeft}>
+          <div className={styles.barberEyebrow}>EST. 2018 · WARSAW</div>
+          <div className={styles.barberHeadline}>Sharp cuts.<br />No excuses.</div>
+          <button className={`${styles.barberCta} ${hovering ? styles.barberCtaHover : ''}`}>
+            Book now
+          </button>
+        </div>
+        <div className={styles.barberHeroImage} />
+      </div>
+      <div className={styles.barberMenu}>
+        <div className={styles.barberMenuItem}>
+          <span>Classic Cut</span>
+          <span>€35</span>
+        </div>
+        <div className={styles.barberMenuDivider} />
+        <div className={styles.barberMenuItem}>
+          <span>Cut &amp; Beard</span>
+          <span>€55</span>
+        </div>
+        <div className={styles.barberMenuDivider} />
+        <div className={styles.barberMenuItem}>
+          <span>Full Service</span>
+          <span>€75</span>
+        </div>
+      </div>
+      <div className={`${styles.cursor} ${styles.barberCursor}`} aria-hidden="true" />
+    </div>
+  );
+}
+
+/* ============================================================================
+   HOTEL — Bellmont (boutique, warm luxury)
+   ============================================================================ */
+function HotelScreen({ hovering }: { hovering: boolean }) {
+  return (
+    <div className={styles.hotelScreen}>
+      <div className={styles.hotelNav}>
+        <span className={styles.hotelLogo}>HOTEL BELLMONT</span>
+        <div className={styles.hotelNavLinks}>
+          <span>Rooms</span>
+          <span>Dining</span>
+          <span>Spa</span>
+        </div>
+      </div>
+      <div className={styles.hotelHero}>
+        <div className={styles.hotelHeroImage} />
+        <div className={styles.hotelHeroContent}>
+          <div className={styles.hotelEyebrow}>Boutique Hotel · Warsaw Old Town</div>
+          <div className={styles.hotelHeadline}>A room worth<br />returning to.</div>
+          <button className={`${styles.hotelCta} ${hovering ? styles.hotelCtaHover : ''}`}>
+            Check availability
+          </button>
+        </div>
+      </div>
+      <div className={styles.hotelFeatures}>
+        <div className={styles.hotelFeature}>28 Rooms</div>
+        <div className={styles.hotelFeatureDivider} />
+        <div className={styles.hotelFeature}>Restaurant</div>
+        <div className={styles.hotelFeatureDivider} />
+        <div className={styles.hotelFeature}>Spa</div>
+        <div className={styles.hotelFeatureDivider} />
+        <div className={styles.hotelFeature}>Events</div>
+      </div>
+      <div className={`${styles.cursor} ${styles.hotelCursor}`} aria-hidden="true" />
+    </div>
+  );
+}
+
+/* ============================================================================
+   CONSTRUCTION — Budmar (bold, industrial dark)
+   ============================================================================ */
+function ConstructionScreen({ hovering }: { hovering: boolean }) {
+  return (
+    <div className={styles.constructScreen}>
+      <div className={styles.constructNav}>
+        <span className={styles.constructLogo}>BUDMAR</span>
+        <div className={styles.constructNavLinks}>
+          <span>Projects</span>
+          <span>Services</span>
+          <span>Contact</span>
+        </div>
+      </div>
+      <div className={styles.constructHero}>
+        <div className={styles.constructHeroLeft}>
+          <div className={styles.constructEyebrow}>GENERAL CONTRACTOR · SINCE 2003</div>
+          <div className={styles.constructHeadline}>We build what<br />others won't touch.</div>
+          <button className={`${styles.constructCta} ${hovering ? styles.constructCtaHover : ''}`}>
+            Request a quote
+          </button>
+        </div>
+        <div className={styles.constructHeroImage} />
+      </div>
+      <div className={styles.constructTags}>
+        <span className={styles.constructTag}>Commercial</span>
+        <span className={styles.constructTag}>Residential</span>
+        <span className={styles.constructTag}>Renovation</span>
+        <span className={styles.constructTag}>Industrial</span>
+      </div>
+      <div className={`${styles.cursor} ${styles.constructCursor}`} aria-hidden="true" />
+    </div>
+  );
+}
+
+/* ============================================================================
+   LOCAL BUSINESS — Lumière Spa (light, premium, minimal)
+   ============================================================================ */
+function LocalBusinessScreen({ hovering }: { hovering: boolean }) {
+  return (
+    <div className={styles.localScreen}>
+      <div className={styles.localNav}>
+        <span className={styles.localLogo}>LUMIÈRE</span>
+        <div className={styles.localNavLinks}>
+          <span>Treatments</span>
+          <span>About</span>
+          <span>Book</span>
+        </div>
+      </div>
+      <div className={styles.localHero}>
+        <div className={styles.localHeroImage} />
+        <div className={styles.localHeroContent}>
+          <div className={styles.localEyebrow}>Premium Spa & Skincare · Warsaw</div>
+          <div className={styles.localHeadline}>Beauty that<br />takes its time.</div>
+          <button className={`${styles.localCta} ${hovering ? styles.localCtaHover : ''}`}>
+            Book a treatment
+          </button>
+        </div>
+      </div>
+      <div className={styles.localServices}>
+        <span>Skincare</span>
+        <span className={styles.localDot}>·</span>
+        <span>Body Treatments</span>
+        <span className={styles.localDot}>·</span>
+        <span>Massage</span>
+      </div>
+      <div className={`${styles.cursor} ${styles.localCursor}`} aria-hidden="true" />
+    </div>
+  );
+}
+
+/* ============================================================================
+   BEFORE screen — generic placeholder
+   ============================================================================ */
+function BeforeScreen() {
   return (
     <div className={styles.beforeScreen}>
       <div className={styles.beforeNav} />
@@ -145,66 +308,56 @@ function BeforeScreen({ project }: { project: string }) {
   );
 }
 
-export default function BrowserMockup({
-  project,
-  showBefore = false,
-  className,
-}: BrowserMockupProps) {
+/* ============================================================================
+   EXPORT
+   ============================================================================ */
+export default function BrowserMockup({ project, showBefore = false, className }: BrowserMockupProps) {
   const [hovering, setHovering] = useState(false);
   const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  // Drive the "button hover" state in sync with cursor animation (6s loop)
-  // Cursor reaches button at ~40% of 6s = 2.4s, dwells until 58% = 3.48s
   useEffect(() => {
     let frameId: ReturnType<typeof setTimeout>;
     const loopDuration = 6000;
 
     const runLoop = () => {
-      // Simulate cursor arriving at button
       frameId = setTimeout(() => {
         setHovering(true);
-        // Cursor leaves button
         const leaveId = setTimeout(() => {
           setHovering(false);
-          // Wait for rest of cycle then repeat
           const nextId = setTimeout(runLoop, loopDuration * 0.42);
           hoverTimerRef.current = nextId;
         }, loopDuration * 0.18);
         hoverTimerRef.current = leaveId;
       }, loopDuration * 0.40);
-
       hoverTimerRef.current = frameId;
     };
 
-    // Start loop with initial offset matching CSS animation
     const initId = setTimeout(runLoop, loopDuration * 0.40);
     hoverTimerRef.current = initId;
-
-    return () => {
-      if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
-    };
+    return () => { if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current); };
   }, []);
 
-  const screenContent = showBefore ? (
-    <BeforeScreen project={project} />
-  ) : project === 'marani' ? (
-    <MaraniScreen hovering={hovering} />
-  ) : project === 'adriano' ? (
-    <AdrianoScreen hovering={hovering} />
-  ) : (
-    <VantageScreen hovering={hovering} />
-  );
+  const screens: Record<ProjectId, React.ReactNode> = {
+    marani:        <MaraniScreen       hovering={hovering} />,
+    restaurant:    <RestaurantScreen   hovering={hovering} />,
+    lawfirm:       <LawFirmScreen      hovering={hovering} />,
+    barbershop:    <BarbershopScreen   hovering={hovering} />,
+    hotel:         <HotelScreen        hovering={hovering} />,
+    construction:  <ConstructionScreen hovering={hovering} />,
+    localbusiness: <LocalBusinessScreen hovering={hovering} />,
+  };
+
+  const screenContent = showBefore ? <BeforeScreen /> : screens[project];
 
   return (
     <div
       className={`${styles.mockup} ${className ?? ''}`}
       role="img"
-      aria-label={`${PROJECT_LABELS[project]} website screenshot`}
+      aria-label={`${PROJECT_URLS[project]} website preview`}
     >
-      {/* Browser chrome */}
       <div className={styles.chrome}>
         <div className={styles.trafficLights}>
-          <span className={`${styles.dot} ${styles.dotRed}`}   aria-hidden="true" />
+          <span className={`${styles.dot} ${styles.dotRed}`}    aria-hidden="true" />
           <span className={`${styles.dot} ${styles.dotYellow}`} aria-hidden="true" />
           <span className={`${styles.dot} ${styles.dotGreen}`}  aria-hidden="true" />
         </div>
@@ -212,7 +365,6 @@ export default function BrowserMockup({
           {PROJECT_URLS[project]}
         </div>
       </div>
-      {/* Screen */}
       <div className={styles.screen}>
         {screenContent}
       </div>

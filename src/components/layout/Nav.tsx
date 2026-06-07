@@ -1,113 +1,59 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './Nav.module.css';
 
-const SECTIONS = [
-  { id: 'work-marani',  label: 'Marani — Restaurant Group' },
-  { id: 'work-adriano', label: 'Adriano — Pizzeria Chain'   },
-  { id: 'work-vantage', label: 'Vantage — Premium Services' },
-];
-
 const NAV_LINKS = [
-  { href: '#work',    label: 'Work'    },
-  { href: '#services',label: 'Services'},
-  { href: '#about',   label: 'About'   },
-  { href: '#contact', label: 'Contact' },
+  { href: '#work',     label: 'Work'    },
+  { href: '#services', label: 'Services'},
+  { href: '#about',    label: 'About'   },
+  { href: '#contact',  label: 'Contact' },
 ];
-
-type NavMode = 'default' | 'section' | 'listening';
 
 export default function Nav() {
-  const [scrolled, setScrolled]         = useState(false);
-  const [menuOpen, setMenuOpen]         = useState(false);
-  const [mode, setMode]                 = useState<NavMode>('default');
-  const [sectionLabel, setSectionLabel] = useState('');
-  const [typingText, setTypingText]     = useState('');
-  const listeningTimer = { current: null as ReturnType<typeof setTimeout> | null };
+  const [scrolled,    setScrolled]    = useState(false);
+  const [menuOpen,    setMenuOpen]    = useState(false);
+  const [listening,   setListening]   = useState(false);
+  const [typingText,  setTypingText]  = useState('');
+  const listeningTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Scroll shadow
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Section detection via IntersectionObserver
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    SECTIONS.forEach(({ id, label }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setMode('section');
-            setSectionLabel(label);
-          } else {
-            // Check if any other section is currently visible before reverting
-            setMode(prev => {
-              if (prev === 'section') {
-                // Check if another section is active
-                const anyActive = SECTIONS.some(s => {
-                  const el = document.getElementById(s.id);
-                  if (!el) return false;
-                  const rect = el.getBoundingClientRect();
-                  return rect.top < window.innerHeight * 0.6 && rect.bottom > window.innerHeight * 0.4;
-                });
-                return anyActive ? 'section' : 'default';
-              }
-              return prev;
-            });
-          }
-        },
-        { threshold: 0, rootMargin: '-20% 0px -40% 0px' }
-      );
-
-      obs.observe(el);
-      observers.push(obs);
-    });
-
-    return () => observers.forEach(obs => obs.disconnect());
-  }, []);
-
-  // Contact form listening behavior
   useEffect(() => {
     const onTyping = (e: Event) => {
       const text = (e as CustomEvent<{ text: string }>).detail.text;
       setTypingText(text);
-      if (mode !== 'listening') setMode('listening');
+      setListening(true);
     };
-
     const onTypingStop = () => {
       if (listeningTimer.current) clearTimeout(listeningTimer.current);
       listeningTimer.current = setTimeout(() => {
-        setMode(prev => prev === 'listening' ? 'default' : prev);
+        setListening(false);
         setTypingText('');
       }, 2000);
     };
-
     const onListeningStart = () => {
-      setMode('listening');
+      setListening(true);
       setTypingText('');
     };
 
-    window.addEventListener('meshly:typing', onTyping as EventListener);
-    window.addEventListener('meshly:typing-stop', onTypingStop);
+    window.addEventListener('meshly:typing',          onTyping as EventListener);
+    window.addEventListener('meshly:typing-stop',     onTypingStop);
     window.addEventListener('meshly:listening-start', onListeningStart);
 
     return () => {
-      window.removeEventListener('meshly:typing', onTyping as EventListener);
-      window.removeEventListener('meshly:typing-stop', onTypingStop);
+      window.removeEventListener('meshly:typing',          onTyping as EventListener);
+      window.removeEventListener('meshly:typing-stop',     onTypingStop);
       window.removeEventListener('meshly:listening-start', onListeningStart);
       if (listeningTimer.current) clearTimeout(listeningTimer.current);
     };
-  }, [mode]);
+  }, []);
 
-  // Body scroll lock
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -123,23 +69,18 @@ export default function Nav() {
   }, []);
 
   const wordmark = (() => {
-    if (mode === 'listening') {
+    if (listening) {
       if (!typingText) return 'Listening…';
       const preview = typingText.slice(0, 46);
       return preview.length < typingText.length ? preview + '…' : preview;
     }
-    if (mode === 'section') return sectionLabel;
     return 'Meshly';
   })();
 
   return (
     <>
-      <header
-        className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}
-        role="banner"
-      >
+      <header className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} role="banner">
         <div className={styles.inner}>
-          {/* Wordmark */}
           <a
             href="/"
             className={styles.wordmark}
@@ -149,7 +90,7 @@ export default function Nav() {
             <span className={styles.dot} aria-hidden="true" />
             <motion.span
               key={wordmark}
-              className={`${styles.wordmarkText} ${mode !== 'default' ? styles.wordmarkAlt : ''}`}
+              className={`${styles.wordmarkText} ${listening ? styles.wordmarkAlt : ''}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
@@ -158,7 +99,6 @@ export default function Nav() {
             </motion.span>
           </a>
 
-          {/* Desktop links */}
           <nav className={styles.links} aria-label="Primary navigation">
             {NAV_LINKS.map(({ href, label }) => (
               <a
@@ -172,7 +112,6 @@ export default function Nav() {
             ))}
           </nav>
 
-          {/* Hamburger */}
           <button
             className={styles.hamburger}
             onClick={() => setMenuOpen(p => !p)}
@@ -185,7 +124,6 @@ export default function Nav() {
         </div>
       </header>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
