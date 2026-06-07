@@ -5,6 +5,8 @@ import styles from './BrowserMockup.module.css';
 
 export type ProjectId =
   | 'marani'
+  | 'adriano'
+  | 'vantage'
   | 'restaurant'
   | 'lawfirm'
   | 'barbershop'
@@ -20,6 +22,8 @@ interface BrowserMockupProps {
 
 const PROJECT_URLS: Record<ProjectId, string> = {
   marani:        'marani.pl',
+  adriano:       'adriano.com.pl',
+  vantage:       'vantageservices.eu',
   restaurant:    'emilia-restaurant.pl',
   lawfirm:       'kowalski-partners.pl',
   barbershop:    'theblade.pl',
@@ -60,6 +64,68 @@ function MaraniScreen({ hovering }: { hovering: boolean }) {
         <span>Open daily</span>
       </div>
       <div className={`${styles.cursor} ${styles.maraniCursor}`} aria-hidden="true" />
+    </div>
+  );
+}
+
+/* ============================================================================
+   ADRIANO — Pizzeria chain, warm light
+   ============================================================================ */
+function AdrianoScreen({ hovering }: { hovering: boolean }) {
+  return (
+    <div className={styles.adrianoScreen}>
+      <div className={styles.adrianoNav}>
+        <span className={styles.adrianoLogo}>Adriano</span>
+        <div className={styles.adrianoNavLinks}>
+          <span>Menu</span><span>Locations</span><span>Order</span>
+        </div>
+      </div>
+      <div className={styles.adrianoHero}>
+        <div className={styles.adrianoHeroContent}>
+          <div className={styles.adrianoEyebrow}>Authentic</div>
+          <div className={styles.adrianoHeadline}>Pizza</div>
+          <div className={styles.adrianoSub}>From Warsaw, for Warsaw</div>
+          <div className={`${styles.adrianoCta} ${hovering ? styles.adrianoCtaHover : ''}`}>
+            Find nearest location →
+          </div>
+        </div>
+        <div className={styles.adrianoHeroImage} />
+      </div>
+      <div className={styles.adrianoLocations}>
+        {['Śródmieście', 'Mokotów', 'Wola'].map(name => (
+          <div key={name} className={styles.adrianoCard}>{name}</div>
+        ))}
+      </div>
+      <div className={`${styles.cursor} ${styles.adrianoCursor}`} aria-hidden="true" />
+    </div>
+  );
+}
+
+/* ============================================================================
+   VANTAGE — Premium services, deep navy
+   ============================================================================ */
+function VantageScreen({ hovering }: { hovering: boolean }) {
+  return (
+    <div className={styles.vantageScreen}>
+      <div className={styles.vantageNav}>
+        <span className={styles.vantageLogo}>VANTAGE</span>
+        <div className={styles.vantageNavLinks}>
+          <span>Services</span><span>About</span><span>Contact</span>
+        </div>
+      </div>
+      <div className={styles.vantageHero}>
+        <div className={styles.vantageEyebrow}>Premium</div>
+        <div className={styles.vantageHeadline}>Business<br />Solutions</div>
+        <div className={styles.vantageSub}>Strategy · Growth · Results</div>
+        <button className={`${styles.vantageCta} ${hovering ? styles.vantageCtaHover : ''}`}>
+          Schedule Consultation
+        </button>
+      </div>
+      <div className={styles.vantageCards}>
+        <div className={styles.vantageCard}>Legal Advisory</div>
+        <div className={styles.vantageCard}>Corporate Strategy</div>
+      </div>
+      <div className={`${styles.cursor} ${styles.vantageCursor}`} aria-hidden="true" />
     </div>
   );
 }
@@ -338,12 +404,14 @@ export default function BrowserMockup({ project, showBefore = false, className }
   }, []);
 
   const screens: Record<ProjectId, React.ReactNode> = {
-    marani:        <MaraniScreen       hovering={hovering} />,
-    restaurant:    <RestaurantScreen   hovering={hovering} />,
-    lawfirm:       <LawFirmScreen      hovering={hovering} />,
-    barbershop:    <BarbershopScreen   hovering={hovering} />,
-    hotel:         <HotelScreen        hovering={hovering} />,
-    construction:  <ConstructionScreen hovering={hovering} />,
+    marani:        <MaraniScreen        hovering={hovering} />,
+    adriano:       <AdrianoScreen       hovering={hovering} />,
+    vantage:       <VantageScreen       hovering={hovering} />,
+    restaurant:    <RestaurantScreen    hovering={hovering} />,
+    lawfirm:       <LawFirmScreen       hovering={hovering} />,
+    barbershop:    <BarbershopScreen    hovering={hovering} />,
+    hotel:         <HotelScreen         hovering={hovering} />,
+    construction:  <ConstructionScreen  hovering={hovering} />,
     localbusiness: <LocalBusinessScreen hovering={hovering} />,
   };
 

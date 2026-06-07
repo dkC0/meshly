@@ -1,5 +1,37 @@
+/* ============================================================================
+   CAPABILITIES (HOW WE WORK) — Warm copper-tinted background, tags in orange
+   ============================================================================ */
+
 .section {
   padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Warm copper glow — bottom left, makes section feel distinct */
+.section::before {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  left: -8%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 115, 61, 0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Cooler blue counter-glow — top right */
+.section::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30, 80, 200, 0.08) 0%, transparent 65%);
+  pointer-events: none;
 }
 
 .inner {
@@ -9,6 +41,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-64);
+  position: relative;
+  z-index: 1;
 }
 
 /* -------------------------------------------------------------------------
@@ -49,7 +83,7 @@
 }
 
 /* -------------------------------------------------------------------------
-   Cards — 2×2 grid with richer hover
+   Cards — 2×2, lift on hover
    ------------------------------------------------------------------------- */
 .cards {
   display: grid;
@@ -101,9 +135,7 @@
   transition: color var(--dur-fast);
 }
 
-.card:hover .cardTitle {
-  color: #fff;
-}
+.card:hover .cardTitle { color: #fff; }
 
 .cardBody {
   font-family: var(--font-body);
@@ -112,15 +144,10 @@
   color: var(--color-text-secondary);
   margin: 0;
   flex: 1;
-  transition: color var(--dur-fast);
-}
-
-.card:hover .cardBody {
-  color: var(--color-text-secondary);
 }
 
 /* -------------------------------------------------------------------------
-   Tags
+   Tags — copper/orange as requested
    ------------------------------------------------------------------------- */
 .tags {
   display: flex;
@@ -132,17 +159,17 @@
 .tag {
   font-family: var(--font-mono);
   font-size: var(--text-10);
-  color: var(--color-text-muted);
-  background: rgba(248, 250, 252, 0.04);
-  border: 1px solid var(--color-border-subtle);
+  color: var(--color-copper);
+  background: var(--color-copper-muted);
+  border: 1px solid rgba(201, 115, 61, 0.25);
   border-radius: 100px;
   padding: 3px 10px;
   letter-spacing: 0.04em;
   white-space: nowrap;
-  transition: border-color var(--dur-fast), color var(--dur-fast);
+  transition: background var(--dur-fast), border-color var(--dur-fast);
 }
 
 .card:hover .tag {
-  border-color: rgba(248, 250, 252, 0.12);
-  color: var(--color-text-secondary);
+  background: rgba(201, 115, 61, 0.18);
+  border-color: rgba(201, 115, 61, 0.40);
 }

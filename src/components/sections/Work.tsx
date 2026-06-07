@@ -1,110 +1,82 @@
 'use client';
 
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import BrowserMockup from '@/components/ui/BrowserMockup';
 import styles from './Work.module.css';
 
-const CATEGORIES = [
+const PROJECTS = [
   {
-    id:      'restaurant',
-    label:   'Restaurant',
-    tagline: 'A website that fills tables — before they even walk in the door.',
+    id:       'marani'   as const,
+    name:     'Marani',
+    category: 'Restaurant · Warsaw',
+    result:   'More reservations, more covers, more regulars.',
   },
   {
-    id:      'lawfirm',
-    label:   'Law Firm',
-    tagline: 'Clients arrive already confident they found the right firm.',
+    id:       'adriano'  as const,
+    name:     'Adriano',
+    category: 'Pizzeria Chain · Poland',
+    result:   'One design system across four locations — and scaling.',
   },
   {
-    id:      'barbershop',
-    label:   'Barbershop',
-    tagline: 'Look better than the competition. Online and offline.',
+    id:       'vantage'  as const,
+    name:     'Vantage',
+    category: 'Premium Services',
+    result:   'Positioned alongside London consultancies. Digitally.',
   },
-  {
-    id:      'hotel',
-    label:   'Hotel',
-    tagline: 'Premium rooms deserve a website that earns premium bookings.',
-  },
-  {
-    id:      'construction',
-    label:   'Construction',
-    tagline: 'Show the quality of your work before they ever make the call.',
-  },
-  {
-    id:      'localbusiness',
-    label:   'Local Business',
-    tagline: 'Look like the best option in your area. Every time someone searches.',
-  },
-] as const;
-
-type CategoryId = typeof CATEGORIES[number]['id'];
+];
 
 export default function Work() {
-  const [active, setActive] = useState<CategoryId>('restaurant');
-  const current = CATEGORIES.find(c => c.id === active)!;
-
   return (
-    <section id="work" className={styles.section} aria-label="Work showcase">
+    <section id="work" className={styles.section} aria-label="Selected work">
       <div className={styles.inner}>
 
-        {/* Header */}
-        <div className={styles.header}>
-          <p className={styles.eyebrow}>Our work</p>
+        <motion.div
+          className={styles.header}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className={styles.eyebrow}>Selected work</p>
           <h2 className={styles.title}>
-            Websites that make people want<br />what you're selling.
+            Real businesses.<br />Real results.
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Category tabs */}
-        <div className={styles.tabs} role="tablist" aria-label="Business categories">
-          {CATEGORIES.map(cat => (
-            <button
-              key={cat.id}
-              role="tab"
-              aria-selected={active === cat.id}
-              className={`${styles.tab} ${active === cat.id ? styles.tabActive : ''}`}
-              onClick={() => setActive(cat.id)}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Showcase — large mockup with premium hover border */}
-        <div className={styles.showcase}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              className={styles.mockupWrap}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className={styles.mockupFrame}>
-                <BrowserMockup project={active} className={styles.mockup} />
+        <motion.div
+          className={styles.grid}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {PROJECTS.map((project) => (
+            <div key={project.id} className={styles.card}>
+              <div className={styles.mockupWrap}>
+                <BrowserMockup project={project.id} className={styles.mockup} />
               </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+              <div className={styles.meta}>
+                <div className={styles.metaTop}>
+                  <span className={styles.projectName}>{project.name}</span>
+                  <span className={styles.projectCategory}>{project.category}</span>
+                </div>
+                <p className={styles.result}>{project.result}</p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
 
-        {/* Caption row */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active + '-caption'}
-            className={styles.caption}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            <p className={styles.tagline}>{current.tagline}</p>
-            <a href="#contact" className={styles.cta}>
-              Start your project →
-            </a>
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          className={styles.cta}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
+          <a href="#contact" className={styles.ctaLink}>
+            Start your project →
+          </a>
+        </motion.div>
 
       </div>
     </section>

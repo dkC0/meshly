@@ -1,20 +1,64 @@
+/* ============================================================================
+   ABOUT — Two-column, copper stats, large quote mark, warm orange accents
+   ============================================================================ */
+
 .section {
   padding: var(--section-pad) 0;
   background: var(--color-bg-subtle);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Large decorative copper glow — bottom right */
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  right: -5%;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 115, 61, 0.09) 0%, transparent 65%);
+  pointer-events: none;
 }
 
 .inner {
-  max-width: 680px;
+  max-width: var(--content-w);
   margin: 0 auto;
   padding: 0 var(--content-gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-80);
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1023px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-48);
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Left — headline + copper stats
+   ------------------------------------------------------------------------- */
+.left {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-40);
+  gap: var(--sp-48);
+  position: sticky;
+  top: calc(var(--nav-height) + var(--sp-40));
+}
+
+@media (max-width: 1023px) {
+  .left { position: static; }
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.05;
@@ -22,31 +66,97 @@
   margin: 0;
 }
 
+/* "One standard." — accent in copper */
+.titleAccent {
+  color: var(--color-copper);
+}
+
+/* Stats row — large copper numerals */
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-16);
+  padding-bottom: var(--sp-24);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.stat:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-copper);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  min-width: 4.5rem;
+}
+
+.statLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-15);
+  color: var(--color-text-secondary);
+  line-height: 1;
+}
+
+/* -------------------------------------------------------------------------
+   Right — bio + testimonial + process
+   ------------------------------------------------------------------------- */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-48);
+}
+
 .bio {
   font-family: var(--font-body);
   font-size: var(--text-17);
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--color-text-secondary);
   margin: 0;
 }
 
-/* Pull-quote testimonial */
+/* -------------------------------------------------------------------------
+   Testimonial — copper oversized quote mark
+   ------------------------------------------------------------------------- */
 .quote {
+  position: relative;
   margin: 0;
-  padding: var(--sp-32) 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  padding: var(--sp-32) 0 var(--sp-32) var(--sp-24);
+  border-left: 2px solid var(--color-copper);
+}
+
+/* Oversized decorative quote mark */
+.quoteMark {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 0.6;
+  color: var(--color-copper);
+  margin-bottom: var(--sp-16);
+  opacity: 0.8;
+  user-select: none;
 }
 
 .quoteText {
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
   font-weight: 400;
   font-style: italic;
   color: var(--color-text);
-  line-height: 1.45;
+  line-height: 1.5;
   margin: 0 0 var(--sp-16);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
 }
 
 .quoteCite {
@@ -55,9 +165,12 @@
   color: var(--color-text-muted);
   letter-spacing: 0.06em;
   font-style: normal;
+  display: block;
 }
 
-/* Process — 3 steps */
+/* -------------------------------------------------------------------------
+   Process — 3 steps
+   ------------------------------------------------------------------------- */
 .process {
   display: flex;
   flex-direction: column;
@@ -85,7 +198,7 @@
 .processNum {
   font-family: var(--font-mono);
   font-size: var(--text-11);
-  color: var(--color-text-muted);
+  color: var(--color-copper);
   letter-spacing: 0.06em;
 }
 
