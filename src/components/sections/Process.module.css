@@ -1,0 +1,262 @@
+/* ============================================================================
+   PROCESS SECTION — REBUILT AS HORIZONTAL TIMELINE
+   Blueprint Night. Full-width horizontal node diagram.
+   MeshField at 12% opacity.
+   ============================================================================ */
+
+.section {
+  background-color: var(--color-blueprint-night);
+  padding: var(--section-pad-desktop) 0;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: var(--section-pad-mobile) 0;
+  }
+}
+
+/* Mesh background fills the section */
+.meshBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.inner {
+  max-width: var(--grid-max);
+  margin: 0 auto;
+  padding: 0 var(--grid-margin);
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1023px) {
+  .inner {
+    padding: 0 2.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .inner {
+    padding: 0 1.25rem;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Header row
+   ------------------------------------------------------------------------- */
+
+.headerRow {
+  margin-bottom: var(--space-15);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (max-width: 767px) {
+  .headerRow {
+    margin-bottom: var(--space-10);
+  }
+}
+
+.headerIntro {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: var(--weight-light);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  letter-spacing: var(--tracking-display-l);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Full-width horizontal timeline
+   Desktop: nodes across the width, connected by horizontal rule
+   Mobile: stacked vertical layout
+   ------------------------------------------------------------------------- */
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Track row — nodes + connecting rules at node-center height */
+.timelineTrack {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.trackItem {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.trackItem:last-child {
+  flex: 0 0 auto;
+}
+
+/* Phase number above node */
+.phaseNumberAbove {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  color: rgba(212, 116, 58, 0.65);
+  letter-spacing: var(--tracking-label);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'ss01' 1;
+  white-space: nowrap;
+}
+
+/* For first item, align left */
+.trackItem:first-child .phaseNumberAbove {
+  left: 0;
+  transform: none;
+}
+
+/* For last item, align right */
+.trackItem:last-child .phaseNumberAbove {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+/* 12px Signal Copper node */
+.timelineNode {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-signal-copper);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* Horizontal connecting rule — draws L→R */
+.connectingRule {
+  display: block;
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-signal-copper);
+  transform-origin: left center;
+  opacity: 0.6;
+}
+
+/* -------------------------------------------------------------------------
+   Phase grid — below the timeline track
+   Same 4-column structure as the track
+   ------------------------------------------------------------------------- */
+
+.phaseGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0 var(--space-5);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 899px) {
+  .phaseGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8) var(--space-5);
+  }
+
+  /* Hide horizontal timeline track on small screens — show stacked */
+  .timelineTrack {
+    display: none;
+  }
+}
+
+@media (max-width: 599px) {
+  .phaseGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8) 0;
+  }
+}
+
+.phaseItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-1);
+}
+
+.phaseHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.phaseName {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: var(--weight-medium);
+  color: var(--color-text-primary);
+  letter-spacing: 0.12em;
+  display: block;
+  text-transform: uppercase;
+}
+
+.phaseDescription {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(250, 250, 248, 0.6);
+  margin: 0;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+.phaseLine1 {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.phaseLine2 {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: rgba(250, 250, 248, 0.6);
+  margin: 0 0 8px;
+}
+
+.phaseDuration {
+  font-family: var(--font-mono);
+  font-size: var(--type-mono-sm);
+  color: var(--color-text-muted);
+  display: block;
+  margin-top: 8px;
+  letter-spacing: var(--tracking-nav);
+}
+
+/* Phase number shown inline on mobile, hidden on desktop */
+.phaseNumberMobile {
+  font-family: var(--font-mono);
+  font-size: var(--type-label);
+  color: rgba(212, 116, 58, 0.65);
+  letter-spacing: var(--tracking-label);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'ss01' 1;
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .phaseNumberAbove {
+    display: none;
+  }
+
+  .phaseNumberMobile {
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+}

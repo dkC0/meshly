@@ -1,0 +1,86 @@
+.section {
+  padding: var(--section-pad) 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 30%, rgba(30, 75, 190, 0.14) 0%, transparent 65%),
+    var(--color-bg-subtle);
+  border-top: 1px solid var(--color-border);
+}
+
+.inner {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  padding: 0 var(--content-gutter);
+  max-width: 760px;
+}
+
+.header {
+  margin-bottom: var(--sp-40);
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-40);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  line-height: 1.1;
+}
+
+/* -------------------------------------------------------------------------
+   Menu — restaurant menu format, not card grid
+   ------------------------------------------------------------------------- */
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-32);
+  padding: var(--sp-20) 0;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.row:last-child {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.serviceName {
+  font-family: var(--font-body);
+  font-size: var(--text-17);
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+.servicePrice {
+  font-family: var(--font-mono);
+  font-size: var(--text-13);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.note {
+  margin-top: var(--sp-32);
+  font-family: var(--font-display);
+  font-size: var(--text-20);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 767px) {
+  .eyebrow { font-size: var(--text-32); }
+  .note    { font-size: var(--text-17); }
+
+  .row     { flex-direction: column; gap: var(--sp-4); }
+
+  .servicePrice {
+    font-size: var(--text-11);
+    color: var(--color-copper);
+  }
+}

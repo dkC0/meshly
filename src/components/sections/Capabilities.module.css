@@ -1,0 +1,186 @@
+/* ============================================================================
+   CAPABILITIES — How we build / tech stack / differentiators
+   ============================================================================ */
+
+.section {
+  padding: var(--section-pad) 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 85% 20%, rgba(35, 85, 210, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(20, 55, 160, 0.12) 0%, transparent 65%);
+  border-top:    1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  padding: 0 var(--content-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-64);
+}
+
+/* -------------------------------------------------------------------------
+   Header
+   ------------------------------------------------------------------------- */
+.header {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  font-weight: 400;
+  color: var(--color-copper);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.intro {
+  font-family: var(--font-body);
+  font-size: var(--text-17);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Cards grid — 2 × 2 on desktop
+   ------------------------------------------------------------------------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-24);
+}
+
+@media (max-width: 767px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: rgba(20, 35, 75, 0.55);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: var(--sp-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color var(--dur-base), background var(--dur-base);
+}
+
+.card:hover {
+  border-color: rgba(100, 140, 255, 0.25);
+  background: rgba(25, 45, 100, 0.65);
+}
+
+.cardNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--color-copper);
+  letter-spacing: 0.1em;
+  font-weight: 400;
+}
+
+.cardTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-20);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.cardBody {
+  font-family: var(--font-body);
+  font-size: var(--text-15);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+  flex: 1;
+}
+
+/* -------------------------------------------------------------------------
+   Tags
+   ------------------------------------------------------------------------- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-8);
+  margin-top: var(--sp-8);
+}
+
+.tag {
+  font-family: var(--font-body);
+  font-size: var(--text-11);
+  font-weight: 600;
+  color: rgba(180, 200, 255, 0.7);
+  background: rgba(100, 140, 255, 0.08);
+  border: 1px solid rgba(100, 140, 255, 0.15);
+  border-radius: 100px;
+  padding: 3px 10px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* -------------------------------------------------------------------------
+   Tech stack strip
+   ------------------------------------------------------------------------- */
+.stackRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-20);
+  flex-wrap: wrap;
+}
+
+.stackLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stackPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-8);
+}
+
+.pill {
+  font-family: var(--font-body);
+  font-size: var(--text-13);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: rgba(221, 228, 245, 0.06);
+  border: 1px solid var(--color-border);
+  border-radius: 100px;
+  padding: 5px 14px;
+  transition: border-color var(--dur-fast), color var(--dur-fast);
+}
+
+.pill:hover {
+  border-color: rgba(100, 140, 255, 0.3);
+  color: var(--color-text);
+}

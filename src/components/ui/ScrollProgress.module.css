@@ -1,0 +1,92 @@
+.progress {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto;
+  cursor: default;
+}
+
+/* Hide on mobile/tablet */
+@media (max-width: 1023px) {
+  .progress {
+    display: none;
+  }
+}
+
+/* Track — the 1px vertical line */
+.track {
+  position: relative;
+  width: 1px;
+  height: 120px;
+  background: rgba(228, 227, 224, 0.1);
+  display: block;
+}
+
+.progress--dark .track {
+  background: rgba(250, 250, 248, 0.12);
+}
+
+/* Fill — scaleY from 0→1, transform-origin top */
+.fill {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-signal-copper);
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+/* Node — sits at current scroll position on the track */
+.node {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-signal-copper);
+  position: absolute;
+  left: 50%;
+  top: 0;
+  /* -2.5px to center the 6px dot on the 1px line */
+  transform: translateX(-2.5px) translateY(0px);
+  pointer-events: none;
+}
+
+/* Section label — to the left of the track, shown on hover */
+.label {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  color: var(--color-pewter);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  animation: labelFade 150ms ease forwards;
+}
+
+@keyframes labelFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.progress--dark .label {
+  color: rgba(250, 250, 248, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress {
+    display: none;
+  }
+}

@@ -1,0 +1,151 @@
+/* ============================================================================
+   LOADING SCREEN — Network Bootstrap Sequence
+   A single node, then lines extend, then new nodes appear at endpoints,
+   then secondary lines branch. The brand concept in 2 seconds.
+   ============================================================================ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #0C0D0F;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exiting {
+  opacity: 0;
+}
+
+.loaderWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.loaderSvg {
+  display: block;
+  overflow: visible;
+}
+
+/* ============================================================================
+   NODES — appear with scale
+   ============================================================================ */
+
+.node {
+  opacity: 0;
+  transform-origin: center;
+  animation: nodeAppear 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Center origin — appears first */
+.nodeCenter { animation-delay: 0ms; }
+
+/* Primary endpoint nodes — appear after primary lines finish drawing */
+.nodeP1 { animation-delay: 480ms; }
+.nodeP2 { animation-delay: 540ms; }
+.nodeP3 { animation-delay: 600ms; }
+.nodeP4 { animation-delay: 660ms; }
+
+/* Secondary endpoint nodes — appear after secondary lines */
+.nodeS1 { animation-delay: 1020ms; }
+.nodeS2 { animation-delay: 1080ms; }
+
+@keyframes nodeAppear {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================================================
+   LINES — draw via stroke-dashoffset
+   Line lengths:
+     lineP1–P4 (cardinal, 56px each):  sqrt(0 + 56²) = 56
+     lineS1–S2 (diagonal, ~49px):       sqrt(8² + 48²) ≈ 48.7 → 49
+   ============================================================================ */
+
+.line {
+  animation: drawLine 360ms linear forwards;
+}
+
+/* Primary lines — all start drawing at 100ms */
+.lineP1 {
+  stroke-dasharray: 56;
+  stroke-dashoffset: 56;
+  animation-delay: 100ms;
+}
+.lineP2 {
+  stroke-dasharray: 56;
+  stroke-dashoffset: 56;
+  animation-delay: 100ms;
+}
+.lineP3 {
+  stroke-dasharray: 56;
+  stroke-dashoffset: 56;
+  animation-delay: 100ms;
+}
+.lineP4 {
+  stroke-dasharray: 56;
+  stroke-dashoffset: 56;
+  animation-delay: 100ms;
+}
+
+/* Secondary lines — start after endpoint nodes appear */
+.lineS1 {
+  stroke-dasharray: 49;
+  stroke-dashoffset: 49;
+  animation-delay: 720ms;
+  animation-duration: 300ms;
+}
+.lineS2 {
+  stroke-dasharray: 49;
+  stroke-dashoffset: 49;
+  animation-delay: 720ms;
+  animation-duration: 300ms;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ============================================================================
+   WORDMARK — fades in after mesh is assembled
+   ============================================================================ */
+
+.wordmark {
+  font-family: 'Suisse Intl', 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(228, 227, 224, 0.7);
+  opacity: 0;
+  animation: wordmarkFade 350ms ease forwards;
+  animation-delay: 1150ms;
+}
+
+@keyframes wordmarkFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================================================
+   REDUCED MOTION — instant reveal, no animation
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .node    { animation: none; opacity: 1; }
+  .line    { animation: none; stroke-dashoffset: 0; }
+  .wordmark { animation: none; opacity: 1; }
+}

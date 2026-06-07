@@ -1,0 +1,89 @@
+/* ============================================================================
+   404 PAGE
+   Graphite Paper. Ghost numeral. Centered.
+   ============================================================================ */
+
+.page {
+  background-color: var(--color-graphite-paper);
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+/* Large ghost 404 — absolutely positioned, decorative */
+.ghost {
+  position: absolute;
+  font-family: var(--font-serif);
+  font-size: clamp(6rem, 20vw, 7.5rem);
+  font-weight: var(--weight-regular);
+  color: var(--color-pewter);
+  opacity: 0.3;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: 32rem;
+}
+
+.headline {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 4vw, 2rem);
+  font-weight: var(--weight-light);
+  letter-spacing: var(--tracking-display-l);
+  color: var(--color-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-pewter);
+  margin: 0;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: var(--weight-medium);
+  color: var(--color-signal-copper);
+  text-decoration: none;
+  transition: gap var(--duration-short) var(--ease-out-expo);
+  min-height: 44px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.backLink:hover {
+  gap: 0;
+}
+
+.backArrow {
+  display: inline-block;
+  transition: transform var(--duration-short) var(--ease-out-expo);
+}
+
+.backLink:hover .backArrow {
+  transform: translateX(-4px);
+}

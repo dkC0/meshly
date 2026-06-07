@@ -1,0 +1,126 @@
+.section {
+  padding: var(--section-pad) 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 15% 60%, rgba(25, 65, 180, 0.15) 0%, transparent 65%),
+    var(--color-bg-elevated);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.inner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 var(--content-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-40);
+}
+
+/* -------------------------------------------------------------------------
+   Heading
+   ------------------------------------------------------------------------- */
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Bio
+   ------------------------------------------------------------------------- */
+.bio {
+  font-family: var(--font-body);
+  font-size: var(--text-17);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Testimonial — pull-quote style, no card
+   ------------------------------------------------------------------------- */
+.quote {
+  margin: 0;
+  padding: var(--sp-32) 0;
+  border-top: 1px solid rgba(221,228,245,0.12);
+  border-bottom: 1px solid rgba(221,228,245,0.12);
+}
+
+.quoteText {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.45;
+  margin: 0 0 var(--sp-16);
+  letter-spacing: -0.015em;
+}
+
+.quoteCite {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  font-style: normal;
+}
+
+/* -------------------------------------------------------------------------
+   Process — three steps, minimal
+   ------------------------------------------------------------------------- */
+.process {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-20);
+}
+
+.processRule {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.processSteps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-24);
+}
+
+.processStep {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.processNum {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.processName {
+  font-family: var(--font-body);
+  font-size: var(--text-15);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.processDetail {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 599px) {
+  .processSteps {
+    grid-template-columns: 1fr;
+    gap: var(--sp-16);
+  }
+}
