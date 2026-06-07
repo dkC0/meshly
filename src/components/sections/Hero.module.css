@@ -1,5 +1,6 @@
 /* ============================================================================
-   HERO — Dark canvas, cinematic statement.
+   HERO — "The Arrival". Asymmetric editorial composition, kinetic headline,
+   and a single timed proof-metric event in the lower-right negative space.
    Relies on the global ambient glow (globals.css body::before). No local glow.
    ============================================================================ */
 
@@ -9,7 +10,6 @@
   padding-bottom: var(--sp-64);
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
   position: relative;
 }
@@ -21,27 +21,35 @@
 }
 
 /* -------------------------------------------------------------------------
-   Centered content block
+   Arrival grid — text block upper-left, metric in lower-right negative space
    ------------------------------------------------------------------------- */
-.content {
+.arrival {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: var(--content-w);
+  margin: 0 auto;
+  padding: 0 var(--content-gutter);
+  min-height: calc(100svh - var(--nav-height) - var(--sp-64));
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--sp-32);
-  text-align: center;
-  padding: 0 var(--content-gutter);
-  max-width: var(--content-w);
-  width: 100%;
 }
 
 /* -------------------------------------------------------------------------
-   Headline
+   Text block — upper two-thirds, never centered
    ------------------------------------------------------------------------- */
+.textBlock {
+  max-width: 66%;
+  margin-top: clamp(var(--sp-32), 10vh, 14vh);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 8vw, 6.5rem);
+  font-size: clamp(2.75rem, 7vw, 6rem);
   font-weight: 400;
   font-style: italic;
   letter-spacing: -0.03em;
@@ -50,21 +58,38 @@
   margin: 0;
 }
 
-/* -------------------------------------------------------------------------
-   Descriptor + CTAs
-   ------------------------------------------------------------------------- */
-.descriptor {
-  font-family: var(--font-body);
-  font-size: var(--text-17);
-  color: var(--color-text-muted);
-  margin: 0;
-  line-height: 1;
+.lineWrap {
+  display: block;
+  overflow: hidden;
 }
 
+.headlineLine {
+  display: inline-block;
+  will-change: transform;
+}
+
+.accent {
+  color: var(--color-copper);
+}
+
+.subheadline {
+  font-family: var(--font-body);
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 42ch;
+  margin: var(--sp-24) 0 0;
+}
+
+/* -------------------------------------------------------------------------
+   CTAs — left-aligned, the natural conclusion of the paragraph above
+   ------------------------------------------------------------------------- */
 .ctas {
   display: flex;
   align-items: center;
   gap: var(--sp-32);
+  margin-top: var(--sp-40);
 }
 
 .ctaPrimary {
@@ -122,71 +147,96 @@
 .ctaSecondary:hover::after { width: 100%; }
 
 /* -------------------------------------------------------------------------
-   Before / after comparison
+   Metric module — the single timed event, anchored in the lower-right
+   negative space. Inert by design: no hover state, no cursor reaction.
    ------------------------------------------------------------------------- */
-.compare {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: var(--sp-32);
-  width: 100%;
-  max-width: 1040px;
-  margin-top: var(--sp-24);
-}
-
-.frame {
+.metricZone {
+  position: absolute;
+  right: var(--content-gutter);
+  bottom: clamp(var(--sp-32), 8vh, 12vh);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--sp-12);
+  align-items: flex-end;
+  text-align: right;
+  pointer-events: none;
 }
 
-.frameMockup {
-  width: 100%;
+.bloom {
+  position: absolute;
+  inset: -50% -70%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 115, 61, 0.25) 0%, transparent 70%);
 }
 
-.frameBefore {
-  opacity: 0.55;
-  transform: scale(0.94);
-}
-
-.frameAfter {
-  position: relative;
-}
-
-.frameAfter .frameMockup {
-  box-shadow: var(--shadow-xl), 0 0 80px rgba(201, 115, 61, 0.12);
-}
-
-.frameLabel {
-  font-family: var(--font-mono);
-  font-size: var(--text-10);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.frameAfter .frameLabel {
+.metricValue {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: var(--color-copper);
 }
 
-@media (max-width: 900px) {
-  .compare {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-    gap: var(--sp-20);
+.metricLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: var(--sp-8);
+  min-height: 1.2em;
+}
+
+.metricCaret {
+  display: inline-block;
+  width: 1px;
+  height: 0.85em;
+  background: var(--color-copper);
+  animation: caretBlink 1s step-end infinite;
+}
+
+@keyframes caretBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.metricAttribution {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-top: var(--sp-8);
+}
+
+/* -------------------------------------------------------------------------
+   Responsive — single column, metric arrives centered beneath the CTAs
+   ------------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+  .textBlock {
+    max-width: 100%;
   }
 
-  /* Keep both frames — shrink "Before" into a clearly secondary thumbnail
-     that sits above the full-size "After" frame, so the contrast still
-     reads as one cohesive before → after statement. */
-  .frameBefore {
-    max-width: 60%;
-    justify-self: start;
+  .metricZone {
+    position: static;
+    align-items: center;
+    text-align: center;
+    align-self: center;
+    margin-top: var(--sp-64);
+  }
+
+  .bloom {
+    inset: -60% -40%;
   }
 }
 
 @media (max-width: 767px) {
   .headline { font-size: clamp(2.25rem, 11vw, 3.25rem); }
-  .ctas     { flex-wrap: wrap; justify-content: center; gap: var(--sp-20); }
+  .ctas     { flex-wrap: wrap; gap: var(--sp-20); }
 }
