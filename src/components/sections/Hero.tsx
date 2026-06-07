@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import MeshField from '@/components/ui/MeshField';
 import styles from './Hero.module.css';
 
 export default function Hero() {
@@ -23,16 +22,6 @@ export default function Hero() {
 
   return (
     <section id="hero" className={styles.hero} aria-label="Studio — Meshly">
-
-      {/* Interactive mesh — responds to cursor */}
-      <MeshField
-        opacity={0.07}
-        density="sparse"
-        mouseReactive
-        id="hero-mesh"
-        className={styles.mesh}
-        activeColor="rgba(248,250,252,0.6)"
-      />
 
       {/* Content */}
       <div className={styles.content}>
