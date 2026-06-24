@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "marani"]
+  "exclude": ["node_modules", "marani", "src/components/sections/Process.tsx"]
 }

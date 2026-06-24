@@ -141,7 +141,7 @@ const structuredData = [
       addressRegion: 'Mazowieckie',
       addressCountry: 'PL',
     },
-    sameAs: [],
+    sameAs: ['https://github.com/dkC0'],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
@@ -195,12 +195,8 @@ const structuredData = [
     publisher: { '@id': `${SITE_URL}/#organization` },
     inLanguage: 'en',
     potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE_URL}/?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
+      '@type': 'ReadAction',
+      target: SITE_URL,
     },
   },
   {
