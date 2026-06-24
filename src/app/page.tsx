@@ -2,8 +2,9 @@ import Loader        from '@/components/ui/Loader';
 import Nav           from '@/components/layout/Nav';
 import Footer        from '@/components/layout/Footer';
 import Hero          from '@/components/sections/Hero';
-import Capabilities  from '@/components/sections/Capabilities';
+import ResultsBand   from '@/components/sections/ResultsBand';
 import Work          from '@/components/sections/Work';
+import Philosophy    from '@/components/sections/Philosophy';
 import Services      from '@/components/sections/Services';
 import About         from '@/components/sections/About';
 import Contact       from '@/components/sections/Contact';
@@ -15,8 +16,9 @@ export default function Home() {
       <Nav />
       <main id="main-content">
         <Hero />
-        <Capabilities />
+        <ResultsBand />
         <Work />
+        <Philosophy />
         <Services />
         <About />
         <Contact />

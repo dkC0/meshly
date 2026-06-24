@@ -1,5 +1,6 @@
 /* ==========================================================================
    MESHLY — Keyframe Animations
+   Only what's actually used. Dead keyframes removed.
    ========================================================================== */
 
 @keyframes fadeUp {
@@ -10,11 +11,6 @@
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
-}
-
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
 }
 
 @keyframes scaleXIn {
@@ -28,79 +24,14 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Ring draw for future use */
-@keyframes ringDraw {
-  from { stroke-dashoffset: 220; }
-  to   { stroke-dashoffset: 0; }
+/* Rule draw — horizontal divider reveal */
+@keyframes drawRule {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
-/* Cursor paths — one per screen */
-@keyframes cursorDrift {
-  0%   { transform: translate(70px,  28px); }
-  30%  { transform: translate(210px, 110px); }
-  42%  { transform: translate(225px, 118px); }
-  58%  { transform: translate(225px, 118px); }
-  72%  { transform: translate(210px, 110px); }
-  100% { transform: translate(70px,  28px); }
+/* Shimmer — subtle light sweep across surfaces */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
-@keyframes adrianoCursor {
-  0%   { transform: translate(50px,  25px); }
-  35%  { transform: translate(140px, 88px); }
-  50%  { transform: translate(140px, 88px); }
-  100% { transform: translate(50px,  25px); }
-}
-@keyframes vantageCursor {
-  0%   { transform: translate(120px, 30px); }
-  40%  { transform: translate(120px, 105px); }
-  55%  { transform: translate(120px, 105px); }
-  100% { transform: translate(120px, 30px); }
-}
-@keyframes restaurantCursor {
-  0%   { transform: translate(60px,  25px); }
-  35%  { transform: translate(170px, 105px); }
-  50%  { transform: translate(185px, 112px); }
-  65%  { transform: translate(185px, 112px); }
-  80%  { transform: translate(170px, 105px); }
-  100% { transform: translate(60px,  25px); }
-}
-@keyframes lawCursor {
-  0%   { transform: translate(100px, 60px); }
-  40%  { transform: translate(160px, 130px); }
-  55%  { transform: translate(175px, 138px); }
-  70%  { transform: translate(175px, 138px); }
-  85%  { transform: translate(160px, 130px); }
-  100% { transform: translate(100px, 60px); }
-}
-@keyframes barberCursor {
-  0%   { transform: translate(55px,  30px); }
-  38%  { transform: translate(145px, 115px); }
-  52%  { transform: translate(158px, 122px); }
-  66%  { transform: translate(158px, 122px); }
-  82%  { transform: translate(145px, 115px); }
-  100% { transform: translate(55px,  30px); }
-}
-@keyframes hotelCursor {
-  0%   { transform: translate(160px, 40px); }
-  35%  { transform: translate(200px, 120px); }
-  50%  { transform: translate(214px, 128px); }
-  65%  { transform: translate(214px, 128px); }
-  80%  { transform: translate(200px, 120px); }
-  100% { transform: translate(160px, 40px); }
-}
-@keyframes constructCursor {
-  0%   { transform: translate(65px,  30px); }
-  40%  { transform: translate(175px, 108px); }
-  55%  { transform: translate(190px, 116px); }
-  70%  { transform: translate(190px, 116px); }
-  85%  { transform: translate(175px, 108px); }
-  100% { transform: translate(65px,  30px); }
-}
-@keyframes localCursor {
-  0%   { transform: translate(160px, 45px); }
-  38%  { transform: translate(195px, 125px); }
-  52%  { transform: translate(208px, 132px); }
-  66%  { transform: translate(208px, 132px); }
-  82%  { transform: translate(195px, 125px); }
-  100% { transform: translate(160px, 45px); }
-}
-

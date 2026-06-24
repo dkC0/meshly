@@ -1,6 +1,6 @@
 {
   "name": "meshly",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,8 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/jetbrains-mono": "^5.2.8",
     "@vercel/analytics": "^2.0.1",
     "framer-motion": "^11.18.2",
     "next": "16.2.6",

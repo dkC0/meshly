@@ -8,12 +8,26 @@
   justify-content: center;
 }
 
+.glow {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 115, 61, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--sp-24);
+  gap: var(--sp-20);
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .wordmark {
@@ -22,37 +36,47 @@
   gap: 0;
 }
 
+.letterWrap {
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+}
+
 .letter {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 800;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 700;
   color: var(--color-text);
   line-height: 1;
-  will-change: transform, opacity;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
 }
 
 .rule {
   width: 100%;
-  max-width: 260px;
+  max-width: 240px;
   height: 1px;
-  background: var(--color-border);
-  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-copper) 20%,
+    var(--color-copper) 80%,
+    transparent 100%
+  );
 }
 
 .results {
   display: flex;
   flex-direction: column;
-  gap: var(--sp-12);
+  gap: var(--sp-8);
   min-width: 220px;
 }
 
 .row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--sp-24);
-  align-items: baseline;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-16);
+  justify-content: center;
 }
 
 .client {
@@ -60,7 +84,15 @@
   font-size: var(--text-13);
   font-weight: 400;
   color: var(--color-text-secondary);
-  text-align: left;
+  text-align: right;
+  min-width: 5rem;
+}
+
+.separator {
+  width: 16px;
+  height: 1px;
+  background: var(--color-border);
+  flex-shrink: 0;
 }
 
 .result {
@@ -68,5 +100,6 @@
   font-size: var(--text-13);
   font-weight: 400;
   color: var(--color-copper);
-  text-align: right;
+  text-align: left;
+  min-width: 6.5rem;
 }

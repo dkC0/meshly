@@ -13,6 +13,7 @@ export default function NotFound() {
       <span className={styles.ghost} aria-hidden="true">404</span>
 
       <div className={styles.content}>
+        <span className={styles.eyebrow}>404 — Not found</span>
         <h1 className={styles.headline}>Page not found.</h1>
         <p className={styles.body}>
           The page you&rsquo;re looking for doesn&rsquo;t exist or has moved.

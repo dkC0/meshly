@@ -1,27 +1,28 @@
 /* ============================================================================
    404 PAGE
-   Graphite Paper. Ghost numeral. Centered.
+   Dark canvas. Ghost numeral. Centered, editorial.
    ============================================================================ */
 
 .page {
-  background-color: var(--color-graphite-paper);
+  background-color: var(--color-bg);
   min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 2rem;
+  padding: var(--sp-32);
 }
 
 /* Large ghost 404 — absolutely positioned, decorative */
 .ghost {
   position: absolute;
-  font-family: var(--font-serif);
-  font-size: clamp(6rem, 20vw, 7.5rem);
-  font-weight: var(--weight-regular);
-  color: var(--color-pewter);
-  opacity: 0.3;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(8rem, 28vw, 22rem);
+  font-weight: 400;
+  color: var(--color-text);
+  opacity: 0.04;
   user-select: none;
   pointer-events: none;
   line-height: 1;
@@ -38,50 +39,61 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-4);
+  gap: var(--sp-16);
   max-width: 32rem;
 }
 
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--color-copper);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .headline {
-  font-family: var(--font-sans);
-  font-size: clamp(1.75rem, 4vw, 2rem);
-  font-weight: var(--weight-light);
-  letter-spacing: var(--tracking-display-l);
-  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-text);
   margin: 0;
-  text-wrap: balance;
 }
 
 .body {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-pewter);
+  font-family: var(--font-body);
+  font-size: var(--text-17);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
   margin: 0;
+  max-width: 38ch;
 }
 
 .backLink {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  font-weight: var(--weight-medium);
-  color: var(--color-signal-copper);
+  gap: var(--sp-12);
+  font-family: var(--font-body);
+  font-size: var(--text-15);
+  font-weight: 500;
+  color: var(--color-copper);
   text-decoration: none;
-  transition: gap var(--duration-short) var(--ease-out-expo);
+  transition: gap var(--dur-base) var(--ease-out);
   min-height: 44px;
+  margin-top: var(--sp-8);
   padding: 0;
   cursor: pointer;
 }
 
 .backLink:hover {
-  gap: 0;
+  gap: var(--sp-4);
 }
 
 .backArrow {
   display: inline-block;
-  transition: transform var(--duration-short) var(--ease-out-expo);
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
 .backLink:hover .backArrow {

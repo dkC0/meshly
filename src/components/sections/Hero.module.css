@@ -1,7 +1,6 @@
 /* ============================================================================
-   HERO — "The Arrival". Asymmetric editorial composition, kinetic headline,
+   HERO -- "The Arrival". Asymmetric editorial composition, kinetic headline,
    and a single timed proof-metric event in the lower-right negative space.
-   Relies on the global ambient glow (globals.css body::before). No local glow.
    ============================================================================ */
 
 .hero {
@@ -21,7 +20,7 @@
 }
 
 /* -------------------------------------------------------------------------
-   Arrival grid — text block upper-left, metric in lower-right negative space
+   Arrival grid -- text block upper-left, metric in lower-right negative space
    ------------------------------------------------------------------------- */
 .arrival {
   position: relative;
@@ -36,10 +35,10 @@
 }
 
 /* -------------------------------------------------------------------------
-   Text block — upper two-thirds, never centered
+   Text block -- upper two-thirds, never centered
    ------------------------------------------------------------------------- */
 .textBlock {
-  max-width: 66%;
+  max-width: 64%;
   margin-top: clamp(var(--sp-32), 10vh, 14vh);
   display: flex;
   flex-direction: column;
@@ -65,7 +64,6 @@
 
 .headlineLine {
   display: inline-block;
-  will-change: transform;
 }
 
 .accent {
@@ -83,7 +81,7 @@
 }
 
 /* -------------------------------------------------------------------------
-   CTAs — left-aligned, the natural conclusion of the paragraph above
+   CTAs -- left-aligned, concluding the paragraph above
    ------------------------------------------------------------------------- */
 .ctas {
   display: flex;
@@ -104,7 +102,12 @@
   border: 1px solid var(--color-copper);
   border-radius: 4px;
   padding: 14px 28px;
-  transition: background var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast) var(--ease-out);
+  min-height: 48px;
+  transition:
+    background var(--dur-fast),
+    color var(--dur-fast),
+    border-color var(--dur-fast),
+    transform var(--dur-fast) var(--ease-out);
 }
 
 .ctaPrimary:hover {
@@ -130,6 +133,9 @@
   transition: color var(--dur-fast);
   position: relative;
   padding-bottom: 1px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .ctaSecondary::after {
@@ -147,8 +153,8 @@
 .ctaSecondary:hover::after { width: 100%; }
 
 /* -------------------------------------------------------------------------
-   Metric module — the single timed event, anchored in the lower-right
-   negative space. Inert by design: no hover state, no cursor reaction.
+   Metric module -- anchored in lower-right negative space.
+   Inert by design: no hover state, no cursor reaction.
    ------------------------------------------------------------------------- */
 .metricZone {
   position: absolute;
@@ -166,7 +172,7 @@
   inset: -50% -70%;
   z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 115, 61, 0.25) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(201, 115, 61, 0.20) 0%, transparent 70%);
 }
 
 .metricValue {
@@ -216,7 +222,7 @@
 }
 
 /* -------------------------------------------------------------------------
-   Responsive — single column, metric arrives centered beneath the CTAs
+   Responsive -- single column, metric arrives centered beneath the CTAs
    ------------------------------------------------------------------------- */
 @media (max-width: 1023px) {
   .textBlock {

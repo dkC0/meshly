@@ -15,9 +15,9 @@ const BUSINESS_TYPES = [
 ];
 
 const BUDGETS = [
-  '€1,000 – €3,000',
-  '€3,000 – €6,000',
-  '€6,000 – €12,000',
+  '€1,000 -- €3,000',
+  '€3,000 -- €6,000',
+  '€6,000 -- €12,000',
   '€12,000+',
   "Let's discuss",
 ];
@@ -46,7 +46,6 @@ export default function Contact() {
   const [errors, setErrors]       = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted]   = useState(false);
-  const [submitError, setSubmitError] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const listeningFired = useRef(false);
   const typingStopTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -58,16 +57,12 @@ export default function Contact() {
     setFormData(prev => ({ ...prev, [name]: value }));
 
     if (name === 'message') {
-      // Dispatch listening events for Nav
       if (!listeningFired.current) {
         window.dispatchEvent(new CustomEvent('meshly:listening-start'));
         listeningFired.current = true;
       }
       window.dispatchEvent(new CustomEvent('meshly:typing', { detail: { text: value } }));
 
-      // "Stop" only fires after a real pause — dispatching it on every
-      // keystroke contradicts "typing" in the same breath and makes the
-      // nav preview flicker instead of settling.
       if (typingStopTimer.current) clearTimeout(typingStopTimer.current);
       typingStopTimer.current = setTimeout(() => {
         window.dispatchEvent(new CustomEvent('meshly:typing-stop'));
@@ -105,7 +100,6 @@ export default function Contact() {
 
     setErrors({});
     setSubmitting(true);
-    setSubmitError('');
 
     try {
       const res = await fetch('/api/contact', {
@@ -120,8 +114,7 @@ export default function Contact() {
         throw new Error('Server error');
       }
     } catch {
-      // Fallback to mailto
-      const subject = encodeURIComponent(`Project inquiry${formData.businessType ? ` — ${formData.businessType}` : ''}`);
+      const subject = encodeURIComponent(`Project inquiry${formData.businessType ? ` -- ${formData.businessType}` : ''}`);
       const body = encodeURIComponent(
         `Name: ${formData.name}\nBusiness: ${formData.businessType}\nBudget: ${formData.budget}\n\n${formData.message}`
       );
@@ -135,7 +128,6 @@ export default function Contact() {
   return (
     <section id="contact" className={styles.section} aria-label="Start a project">
       <div className={styles.inner}>
-
         {/* Left */}
         <motion.div
           className={styles.left}
@@ -146,10 +138,19 @@ export default function Contact() {
         >
           <span className={styles.eyebrow}>Start a project</span>
           <h2 className={styles.headline}>Let&rsquo;s make it work.</h2>
+
+          {/* Response time badge -- surfaced prominently */}
+          <div className={styles.responseBadge}>
+            <span className={styles.responseDot} aria-hidden="true" />
+            <span className={styles.responseText}>
+              Response within 24 hours
+            </span>
+          </div>
+
           <p className={styles.sub}>
             Every engagement begins with a 30-minute discovery call.
-            No commitment required. We'll tell you honestly whether
-            we're the right studio for your project.
+            No commitment required. We&rsquo;ll tell you honestly whether
+            we&rsquo;re the right studio for your project.
           </p>
 
           <div className={styles.contactDetails}>
@@ -163,10 +164,6 @@ export default function Contact() {
               <span className={styles.contactLabel}>Location</span>
               <span className={styles.contactValue}>Warsaw, Poland</span>
             </div>
-            <div className={styles.contactRow}>
-              <span className={styles.contactLabel}>Response</span>
-              <span className={styles.contactValue}>Within 24 hours</span>
-            </div>
           </div>
 
           <p className={styles.nda}>
@@ -174,7 +171,7 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        {/* Right — form */}
+        {/* Right -- form */}
         <motion.div
           className={styles.right}
           initial={{ opacity: 0, y: 12 }}
@@ -189,11 +186,10 @@ export default function Contact() {
                 <path d="M7 12l3 3 7-7" stroke="var(--color-copper)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <p className={styles.successHeadline}>Message sent.</p>
-              <p className={styles.successSub}>We'll be in touch within 24 hours.</p>
+              <p className={styles.successSub}>We&rsquo;ll be in touch within 24 hours.</p>
             </div>
           ) : (
             <form className={styles.form} onSubmit={handleSubmit} noValidate aria-label="Project enquiry form">
-
               <div className={styles.field}>
                 <label htmlFor="contact-name" className={styles.label}>Your name</label>
                 <input
@@ -256,19 +252,14 @@ export default function Contact() {
                 {errors.message && <span className={styles.fieldError} role="alert">{errors.message}</span>}
               </div>
 
-              {submitError && (
-                <p className={styles.submitError} role="alert">{submitError}</p>
-              )}
-
               <button
                 type="submit"
                 className={styles.submit}
                 disabled={submitting}
                 aria-busy={submitting}
               >
-                {submitting ? 'Sending…' : 'Tell me about it →'}
+                {submitting ? 'Sending...' : 'Tell me about it →'}
               </button>
-
             </form>
           )}
         </motion.div>

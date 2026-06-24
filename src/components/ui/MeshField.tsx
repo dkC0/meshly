@@ -70,7 +70,7 @@ function generateGrid(
 
 export default function MeshField({
   opacity = 0.06,
-  activeColor = 'var(--color-signal-copper)',
+  activeColor = 'var(--color-copper)',
   className,
   animated = false,
   mouseReactive = false,
@@ -257,7 +257,6 @@ export default function MeshField({
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
       data-mesh-id={meshId}
-      style={{ willChange: 'opacity' } as React.CSSProperties}
     >
       {/* Lines */}
       <g>

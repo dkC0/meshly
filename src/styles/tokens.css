@@ -1,40 +1,48 @@
 /* ==========================================================================
    MESHLY — Design Tokens
+   Warm near-black canvas. Copper earned, not decorative.
    ========================================================================== */
 
 :root {
   /* -------------------------------------------------------------------------
-     COLOR — Dark Canvas System
+     COLOR — Warm Canvas System
+     R > G > B throughout. Premium design studio, not fintech.
      ------------------------------------------------------------------------- */
 
-  --color-bg:            #090E1C;   /* ink navy — primary canvas */
-  --color-bg-subtle:     #111827;   /* secondary surface */
-  --color-bg-elevated:   #141E35;   /* cards, panels */
-  --color-bg-dark:       #060810;   /* deepest — loader, footer */
+  --color-bg:            #0D0B08;   /* warm near-black — primary canvas */
+  --color-bg-subtle:     #171310;   /* secondary surface — perceptibly warmer */
+  --color-bg-elevated:   #1E1914;   /* cards, panels */
+  --color-bg-dark:       #080604;   /* deepest — loader, footer */
+  --color-bg-warm:       #F4F0EB;   /* light palette-break section */
 
   /* Text */
-  --color-text:          #F8FAFC;
-  --color-text-secondary:#94A3B8;
-  --color-text-muted:    #4E5E80;
+  --color-text:          #F4F1EC;   /* warm white — not blue-white */
+  --color-text-secondary:#9C9488;   /* warm gray — readable on dark */
+  --color-text-muted:    #5C554D;   /* warm muted — labels, metadata */
+  --color-text-on-light: #1A1714;   /* text on light backgrounds */
+  --color-text-secondary-on-light: #6B6560;
 
   /* Accent — earned, not decorative */
   --color-copper:        #C9733D;
-  --color-copper-muted:  rgba(201, 115, 61, 0.12);
+  --color-copper-glow:   rgba(201, 115, 61, 0.15);
+  --color-copper-muted:  rgba(201, 115, 61, 0.10);
+  --color-copper-deep:   #A85E2F;
 
   /* Borders — warm light on dark */
-  --color-border:        rgba(248, 250, 252, 0.08);
-  --color-border-subtle: rgba(248, 250, 252, 0.05);
-  --color-border-hover:  rgba(248, 250, 252, 0.20);
+  --color-border:        rgba(244, 241, 236, 0.08);
+  --color-border-subtle: rgba(244, 241, 236, 0.05);
+  --color-border-hover:  rgba(244, 241, 236, 0.18);
+  --color-border-on-light: rgba(26, 23, 20, 0.10);
 
   /* -------------------------------------------------------------------------
      TYPOGRAPHY
+     Three tiers: editorial display, professional body, structural mono.
      ------------------------------------------------------------------------- */
-  --font-display: var(--font-display), 'Playfair Display', 'Georgia', serif;
+  --font-display: var(--font-playfair), 'Playfair Display', 'Georgia', serif;
   --font-body:    var(--font-nunito), 'Nunito', 'DM Sans', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-mono:    var(--font-jetbrains), 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
   /* Scale */
-  --text-9:    0.5625rem;
   --text-10:   0.625rem;
   --text-11:   0.6875rem;
   --text-13:   0.8125rem;
@@ -48,7 +56,7 @@
   --text-hero: clamp(2rem, 4.5vw, 3.25rem);
 
   /* -------------------------------------------------------------------------
-     SPACING
+     SPACING — 8px grid
      ------------------------------------------------------------------------- */
   --sp-4:   0.25rem;
   --sp-8:   0.5rem;
@@ -77,6 +85,7 @@
 
   /* -------------------------------------------------------------------------
      MOTION
+     Expo-out for arrivals. Strong deceleration into rest.
      ------------------------------------------------------------------------- */
   --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
@@ -88,7 +97,7 @@
   --dur-crawl:  800ms;
 
   /* -------------------------------------------------------------------------
-     SHADOWS — depth on dark
+     SHADOWS — warm depth on dark
      ------------------------------------------------------------------------- */
   --shadow-sm: 0 1px 4px  rgba(0, 0, 0, 0.30);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.40);

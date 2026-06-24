@@ -1,3 +1,8 @@
+/* ============================================================================
+   NAV -- Fixed header. Backdrop-blur for desktop, solid bg for mobile.
+   "Listening..." wordmark replaces logo during contact form typing.
+   ============================================================================ */
+
 .nav {
   position: fixed;
   top: 0;
@@ -5,10 +10,18 @@
   right: 0;
   height: var(--nav-height);
   z-index: 1000;
-  background: rgba(9, 14, 28, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(13, 11, 8, 0.92);
   transition: box-shadow var(--dur-base);
+}
+
+/* Desktop only -- backdrop blur. Gated via pointer:fine to avoid
+   mobile GPU jank per [[backdrop-filter-mobile]] */
+@media (pointer: fine) {
+  .nav {
+    background: rgba(13, 11, 8, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
 }
 
 .scrolled {
@@ -36,6 +49,7 @@
   margin-right: auto;
   min-width: 0;
   overflow: hidden;
+  min-height: 44px;
 }
 
 .dot {
@@ -92,6 +106,9 @@
   position: relative;
   padding-bottom: 2px;
   transition: color var(--dur-fast);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .link::after {
@@ -175,6 +192,9 @@
   text-decoration: none;
   letter-spacing: -0.025em;
   transition: color var(--dur-fast);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .mobileLink:hover { color: var(--color-copper); }

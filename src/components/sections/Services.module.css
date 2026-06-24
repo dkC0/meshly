@@ -1,5 +1,6 @@
 /* ============================================================================
-   SERVICES (WHAT WE BUILD) — Editorial numbered layout, premium and creative
+   SERVICES -- Editorial numbered layout with transparent pricing.
+   Post-pricing CTA provides conversion pathway.
    ============================================================================ */
 
 .section {
@@ -20,7 +21,7 @@
 }
 
 /* -------------------------------------------------------------------------
-   Header — two-column
+   Header -- two-column
    ------------------------------------------------------------------------- */
 .header {
   display: grid;
@@ -67,13 +68,12 @@
   line-height: 1.7;
   color: var(--color-text-secondary);
   margin: 0;
-  /* Align to bottom of header grid row */
   align-self: end;
   padding-bottom: 2px;
 }
 
 /* -------------------------------------------------------------------------
-   Service list — numbered editorial rows
+   Service list -- numbered editorial rows
    ------------------------------------------------------------------------- */
 .list {
   display: flex;
@@ -110,7 +110,7 @@
   }
 }
 
-/* Large copper number — italic serif */
+/* Large copper number -- italic serif */
 .num {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 2.5rem);
@@ -128,7 +128,7 @@
   opacity: 1;
 }
 
-/* Middle — name + description */
+/* Middle -- name + description */
 .rowContent {
   display: flex;
   flex-direction: column;
@@ -162,7 +162,7 @@
   color: var(--color-text-secondary);
 }
 
-/* Price — copper, mono, right-aligned */
+/* Price -- copper, mono, right-aligned */
 .price {
   font-family: var(--font-mono);
   font-size: var(--text-13);
@@ -181,10 +181,54 @@
 }
 
 @media (max-width: 767px) {
-  /* Price moves below content on mobile */
   .price {
     grid-column: 2;
     text-align: left;
     font-size: var(--text-11);
   }
+}
+
+/* -------------------------------------------------------------------------
+   Post-pricing CTA -- conversion after price transparency
+   ------------------------------------------------------------------------- */
+.postCta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-20);
+  text-align: center;
+  padding: var(--sp-48) 0 0;
+}
+
+.postCtaText {
+  font-family: var(--font-body);
+  font-size: var(--text-17);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  max-width: 48ch;
+  margin: 0;
+}
+
+.postCtaLink {
+  font-family: var(--font-body);
+  font-size: var(--text-15);
+  font-weight: 600;
+  color: var(--color-bg);
+  background: var(--color-copper);
+  border: 1px solid var(--color-copper);
+  border-radius: 4px;
+  padding: 14px 32px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  transition:
+    background var(--dur-fast),
+    color var(--dur-fast),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.postCtaLink:hover {
+  background: transparent;
+  color: var(--color-copper);
+  transform: translateY(-1px);
 }

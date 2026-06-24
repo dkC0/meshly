@@ -11,32 +11,33 @@ const HEADLINE_LINES = ['Most are', 'losing you', 'customers,', 'quietly.'];
 
 const headlineContainer: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
 };
 
-const lineVariants: Variants = {
-  hidden: { y: 14, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { duration: 0.7, ease: EASE_OUT_EXPO } },
-};
-
-const bloomVariants: Variants = {
-  hidden: { opacity: 0 },
+const lineReveal: Variants = {
+  hidden: { y: '110%' },
   visible: {
-    opacity: [0, 0.15, 0],
-    transition: { duration: 1.4, times: [0, 0.3, 1], ease: 'easeInOut' },
+    y: '0%',
+    transition: { duration: 0.7, ease: EASE_OUT_EXPO },
   },
 };
 
-// The proof-metric — sourced from the Vantage project so the hero stays in
-// sync with the Work section's data. Falls back gracefully (rather than
-// crashing the hero) if that entry is ever renamed or removed.
+const bloomVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: [0, 0.2, 0],
+    scale: [0.8, 1.1, 1],
+    transition: { duration: 1.6, times: [0, 0.25, 1], ease: 'easeInOut' },
+  },
+};
+
 const vantage = projects.find(p => p.name === 'Vantage') ?? projects[0];
 if (process.env.NODE_ENV !== 'production' && !projects.some(p => p.name === 'Vantage')) {
-  console.warn('[Hero] "Vantage" project not found in projects.ts — falling back to projects[0].');
+  console.warn('[Hero] "Vantage" project not found in projects.ts -- falling back to projects[0].');
 }
 
-const METRIC_DELAY_MS = 2350; // T+2.35s — after the deliberate pause
-const LABEL_TYPE_MS = 600;    // total duration of the character-by-character reveal
+const METRIC_DELAY_MS = 2500;
+const LABEL_TYPE_MS = 600;
 
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
@@ -52,16 +53,12 @@ export default function Hero() {
     return () => window.removeEventListener('meshly:loaded', onLoaded);
   }, []);
 
-  // The metric arrives on a fixed timer, not on scroll — its impact depends
-  // on timing, not visibility.
   useEffect(() => {
     if (!loaded) return;
     const timer = setTimeout(() => setMetricPhase(true), METRIC_DELAY_MS);
     return () => clearTimeout(timer);
   }, [loaded]);
 
-  // Character-by-character label reveal, in the spirit of the nav's
-  // "Listening…" typing mechanism.
   useEffect(() => {
     if (!metricPhase) return;
     const full = vantage.metricLabel.toUpperCase();
@@ -75,8 +72,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [metricPhase]);
 
-  // Cursor parallax — desktop with a real pointer only. No scroll-linked
-  // substitute on touch; stillness is the correct mobile texture.
+  // Cursor parallax -- desktop pointer only
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px) and (hover: hover)');
     const update = () => setParallaxEnabled(mq.matches);
@@ -90,7 +86,6 @@ export default function Hero() {
   const springX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 50, damping: 20 });
 
-  // Each headline line drifts a little further than the last — 1.5–6px range.
   const x0 = useTransform(springX, [-0.5, 0.5], [-1.5, 1.5]);
   const x1 = useTransform(springX, [-0.5, 0.5], [-3, 3]);
   const x2 = useTransform(springX, [-0.5, 0.5], [-4.5, 4.5]);
@@ -125,13 +120,12 @@ export default function Hero() {
       ref={sectionRef}
       id="hero"
       className={styles.hero}
-      aria-label="Studio — Meshly"
+      aria-label="Studio -- Meshly"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-
       <MeshField
-        opacity={0.05}
+        opacity={0.04}
         density="sparse"
         mouseReactive
         id="hero-mesh"
@@ -139,10 +133,6 @@ export default function Hero() {
       />
 
       <div className={styles.arrival}>
-        {/* Markup always renders — the headline, subheadline, CTAs, and the
-            metric's final statement must exist in the server-rendered HTML
-            for crawlers and assistive tech. Only the entrance choreography
-            is gated on `loaded`, so it begins once the loader clears. */}
         <div className={styles.textBlock}>
           <motion.h1
             className={styles.headline}
@@ -151,37 +141,38 @@ export default function Hero() {
             animate={loaded ? 'visible' : 'hidden'}
           >
             {HEADLINE_LINES.map((line, i) => (
-              <motion.span key={line} className={styles.lineWrap} variants={lineVariants}>
+              <span key={line} className={styles.lineWrap}>
                 <motion.span
                   className={styles.headlineLine}
+                  variants={lineReveal}
                   style={parallaxEnabled ? { x: lineX[i], y: lineY[i] } : undefined}
                 >
                   {line === 'quietly.'
                     ? <span className={styles.accent}>{line}</span>
                     : line}
                 </motion.span>
-              </motion.span>
+              </span>
             ))}
           </motion.h1>
 
           <motion.p
             className={styles.subheadline}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={loaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 1.0, ease: EASE_OUT_EXPO }}
+            transition={{ duration: 0.6, delay: 0.95, ease: EASE_OUT_EXPO }}
           >
             The studio behind the numbers below.
           </motion.p>
 
           <motion.div
             className={styles.ctas}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={loaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 1.35, ease: EASE_OUT_EXPO }}
+            transition={{ duration: 0.5, delay: 1.3, ease: EASE_OUT_EXPO }}
           >
             <a href="#contact" className={styles.ctaPrimary} onClick={handleScroll('#contact')}>
               <span>Start a project</span>
-              <span className={styles.ctaArrow} aria-hidden="true">→</span>
+              <span className={styles.ctaArrow} aria-hidden="true">&rarr;</span>
             </a>
             <a href="#work" className={styles.ctaSecondary} onClick={handleScroll('#work')}>
               See the work
@@ -190,12 +181,9 @@ export default function Hero() {
         </div>
 
         <div className={styles.metricZone}>
-          {/* The typed reveal is a visual flourish — screen readers get the
-              final statement as one clean, properly-announced string instead
-              of a rapid stream of in-progress fragments. */}
           <span className="visually-hidden" aria-live="polite">
             {metricPhase
-              ? `${vantage.metric} ${vantage.metricLabel} — ${vantage.name}`
+              ? `${vantage.metric} ${vantage.metricLabel} -- ${vantage.name}`
               : ''}
           </span>
           <motion.div
@@ -208,9 +196,9 @@ export default function Hero() {
           <motion.span
             className={styles.metricValue}
             aria-hidden="true"
-            initial={{ scale: 0.92, opacity: 0 }}
+            initial={{ scale: 0.85, opacity: 0 }}
             animate={metricPhase ? { scale: 1, opacity: 1 } : {}}
-            transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
+            transition={{ duration: 0.9, ease: EASE_OUT_EXPO }}
           >
             {vantage.metric}
           </motion.span>
@@ -228,14 +216,13 @@ export default function Hero() {
             className={styles.metricAttribution}
             aria-hidden="true"
             initial={{ opacity: 0 }}
-            animate={metricPhase ? { opacity: 0.6 } : {}}
+            animate={metricPhase ? { opacity: 0.5 } : {}}
             transition={{ duration: 0.4, delay: 0.75 }}
           >
-            — {vantage.name}
+            -- {vantage.name}
           </motion.span>
         </div>
       </div>
-
     </section>
   );
 }

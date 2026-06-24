@@ -1,0 +1,131 @@
+/* ============================================================================
+   PHILOSOPHY -- Scrolling editorial belief statements.
+   Asymmetric two-column layout. Each belief draws its own rule line.
+   Replaces the generic 2x2 card grid.
+   ============================================================================ */
+
+.section {
+  padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+  /* Warm palette break -- light background */
+  background: var(--color-bg-warm);
+  color: var(--color-text-on-light);
+}
+
+.inner {
+  max-width: var(--content-w);
+  margin: 0 auto;
+  padding: 0 var(--content-gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-80);
+  position: relative;
+  z-index: 1;
+}
+
+/* -------------------------------------------------------------------------
+   Header
+   ------------------------------------------------------------------------- */
+.header {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-11);
+  color: var(--color-copper-deep);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--color-text-on-light);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Beliefs -- stacked editorial rows
+   Each belief: rule line + number left + statement+detail right
+   ------------------------------------------------------------------------- */
+.beliefs {
+  display: flex;
+  flex-direction: column;
+}
+
+.belief {
+  display: flex;
+  flex-direction: column;
+}
+
+.beliefRule {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border-on-light);
+  transform-origin: left center;
+}
+
+.beliefContent {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: var(--sp-32);
+  align-items: start;
+  padding: var(--sp-40) 0;
+}
+
+.beliefNumber {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-copper);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.beliefText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  max-width: 640px;
+}
+
+.beliefStatement {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--color-text-on-light);
+  margin: 0;
+}
+
+.beliefDetail {
+  font-family: var(--font-body);
+  font-size: var(--text-15);
+  line-height: 1.7;
+  color: var(--color-text-secondary-on-light);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .beliefContent {
+    grid-template-columns: 3rem 1fr;
+    gap: var(--sp-20);
+    padding: var(--sp-32) 0;
+  }
+}
